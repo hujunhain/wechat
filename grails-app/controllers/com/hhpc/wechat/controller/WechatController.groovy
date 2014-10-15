@@ -212,7 +212,7 @@ class WechatController {
                    userinfo.save()
                }
             userinfo.regionDate=new Date()
-            userinfo.update();
+            userinfo.save();
 
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
             m.setContent("你发送的消息：subscribe"+userinfo.nickname);
@@ -236,7 +236,7 @@ class WechatController {
            def userinfo=WxUser.findByOpenid(fromUserName)
             userinfo.subscribe=2
 
-            userinfo.update();
+            userinfo.save();
 
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
             m.setContent("你发送的消息：subscribe"+userinfo.nickname);
