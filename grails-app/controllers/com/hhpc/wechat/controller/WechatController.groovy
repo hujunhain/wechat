@@ -124,7 +124,7 @@ class WechatController {
 
         weChatService.menuCreate(menu)
         println "munu****************"
-        render weChatService.menuGet();
+        render weChatService.menuGet().toJson();
     }
 
     /**

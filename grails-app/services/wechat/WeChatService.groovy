@@ -42,7 +42,7 @@ class WeChatService implements WxService {
         def appid=grailsApplication.config.wechat.appid //BuildConfig.groovy
         def appSecret=grailsApplication.config.wechat.appSecret //BuildConfig.groovy
         def token=grailsApplication.config.wechat.token //BuildConfig.groovy
-          serverIp=grailsApplication.config.wechat.token //Config.groovy
+          serverIp=grailsApplication.config.wechat.server.ip //Config.groovy
 
         this.wxService = new WxServiceImpl();
         this.wxConfig = new WxInMemoryConfigStorage();
