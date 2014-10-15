@@ -245,11 +245,13 @@ println "UU"
 println "UU"
             println "UU"
 
-           def userinfo=WxUser.findByOpenidLike(fromUserName)
+            WxUser userinfo=WxUser.findByOpenidLike(fromUserName)
             userinfo.subscribe=2
-            println("un sub%%******:::"+fromUserName+" id:"+userinfo)
+            println("un sub%%******:::"+fromUserName+" id:"+userinfo.id)
 
             userinfo.save();
+
+            println("subscribe sub%%******:::"+fromUserName+" subscribe:"+userinfo.subscribe)
 
             userinfo.errors.allErrors.each {
                 println "save AA userinfo error:"+it
