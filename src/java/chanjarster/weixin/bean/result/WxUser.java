@@ -29,10 +29,13 @@ public class  WxUser {
   protected long subscribe_time;
   protected String unionid;
     /*******************/
-    public String realName;//
-    public String phoneNum ;
-    public Date regionDate ;
-    public Date createDate;
+    public String realName;//真实姓名
+    public String phoneNum ;//手机号码
+    public Date regionDate ;//注册日期
+    public Date createDate;//创建日期
+    public String postName; //岗位
+    public String deptName ;//部门
+
 
     /**********/
 
@@ -148,5 +151,21 @@ public class  WxUser {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public String getPostName() {
+        return postName;
+    }
+
+    public void setPostName(String postName) {
+        this.postName = postName;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 }
