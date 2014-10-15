@@ -20,7 +20,7 @@ class UserController {
        def phoneNum=params['phoneNum']
        def realName=params['realName']
         println "openid:"+openid+"phoneNum:"+phoneNum
-        def userinfo=  WxUser.getByOpenid(openid)
+        def userinfo=  WxUser.findByOpenid(openid)
         userinfo.realName=realName
         userinfo.phoneNum=phoneNum
         userinfo.regionDate=new Date();
@@ -66,7 +66,7 @@ class UserController {
         def openid
         if(code)openid=jsonObject.get("openid")
         else openid='ok_busih96pQuC0C1iUuh2KC_iA0'
-        def userinfo= WxUser.getByOpenid(openid)
+        def userinfo= WxUser.findByOpenid(openid)
 
         [openid:openid,nickname:userinfo.nickname,id:userinfo.id];
 
