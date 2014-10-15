@@ -207,8 +207,11 @@ class WechatController {
             def fromUserName= wxMessage.fromUserName
             def userinfo=WxUser.findByOpenid(fromUserName)
                userinfo=weChatService.userInfo(fromUserName,'zh')
+            println "ss"
+            println "ss"
+            println "s"
+            println "fromUserName:"+fromUserName+" userinfo.id"+userinfo.id
 
-            userinfo.createDate=new Date();
                if(!userinfo.id) {
                    userinfo.createDate=new Date()
                  //  userinfo.save()
@@ -234,6 +237,9 @@ class WechatController {
             def fromUserName= wxMessage.fromUserName
 
          //   def userinfo=weChatService.userInfo(fromUserName,'zh')
+println "UU"
+println "UU"
+            println "UU"
 println("un sub%%******:::"+fromUserName)
            def userinfo=WxUser.findByOpenid(fromUserName)
             userinfo.subscribe=2
