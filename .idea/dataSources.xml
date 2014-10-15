@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1330752345">
+    <data-source source="LOCAL" name="wechat dev" uuid="47a7b672-48a5-4617-a79d-1be034432874">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://114.215.191.167:3306/wechat?useUnicode=yes&amp;characterEncoding=UTF-8</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfd3dfc6df9bdfeddfd2dfcedfccdff0dfc2dfe2df9ddfe0</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
