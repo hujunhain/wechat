@@ -12,9 +12,12 @@ class Seller {
     Date createTime
     MergerSms lastSms // 最新一条记录
 
+    Integer wxUserId //微信id
+
     static constraints = {
         mobile(nullable: true, maxSize: 50)
         lastSms(nullable: true)
+        wxUserId(nullable: true)
         //status=PostStatus.findByName("在职")
     }
 
