@@ -200,17 +200,38 @@ class WechatController {
     subscribe(订阅)
      */
     public  class WxSubMessageHandler implements WxMessageHandler {
-
-
-
         @Override
         public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
 
             def fromUserName= wxMessage.fromUserName
             def userinfo=weChatService.userInfo(fromUserName,'zh')
             userinfo.createDate=new Date();
-               if(!WxUser.findByOpenid(userinfo.openid))
-                      userDao.save(userinfo)
+               if(!WxUser.findByOpenid(userinfo.openid)) {
+                   userinfo.createDate=new Date()
+                   userinfo.save()
+               }
+            WxXmlOutTextMessage m = new WxXmlOutTextMessage();
+            m.setContent("你发送的消息：subscribe"+userinfo.nickname);
+            m.setCreateTime(1122l);
+            m.setFromUserName(wxMessage.toUserName);
+            m.setToUserName(wxMessage.fromUserName);
+            return m;
+        }
+    }
+    /*
+  subscribe(取消订阅)
+   */
+    public  class WxUnSubMessageHandler implements WxMessageHandler {
+        @Override
+        public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
+
+            def fromUserName= wxMessage.fromUserName
+
+            def userinfo=weChatService.userInfo(fromUserName,'zh')
+            userinfo.createDate=new Date();
+            userinfo=WxUser.findByOpenid(userinfo.openid)
+            userinfo.subscribe=2
+
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
             m.setContent("你发送的消息：subscribe"+userinfo.nickname);
             m.setCreateTime(1122l);
