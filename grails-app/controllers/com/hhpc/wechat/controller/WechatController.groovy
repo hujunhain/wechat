@@ -208,18 +208,24 @@ class WechatController {
           //  def userinfo=WxUser.findByOpenidLike(fromUserName)
             WxUser userinfo=WxUser.findByOpenidLike(fromUserName)
 
-               // userinfo=weChatService.userInfo(fromUserName,'zh')
+               def wxuserinfo=weChatService.userInfo(fromUserName,'zh')
             println "ss"
             println "ss"
             println "s"
             println "fromUserName:"+fromUserName+" userinfo.id"+userinfo.id
 
-               if(!userinfo.id) {
-                   userinfo.createDate=new Date()
-                 //  userinfo.save()
-               }
-          //  userinfo.regionDate=new Date()
-            userinfo.save();
+            userinfo.nickname="AA"+wxuserinfo.nickname
+
+            userinfo.createDate=new Date();
+
+            if (!userinfo.hasErrors() && userinfo.save()) {
+                println "save ok????"
+            }
+            else {
+                userinfo.errors.allErrors.each {
+                    println "save userinfo error:"+it
+                }
+            }
 
             userinfo.errors.allErrors.each {
                 println "save SS userinfo error:"+it
@@ -245,20 +251,23 @@ class WechatController {
          //   def userinfo=weChatService.userInfo(fromUserName,'zh')
 println "UU"
 println "UU"
-            println "UU"
+
 
             WxUser userinfo=WxUser.findByOpenidLike(fromUserName)
+            println "UU"+userinfo.subscribe
             userinfo.setSubscribe(false)
             println("un sub%%******:::"+fromUserName+" id:"+userinfo.id)
 
-            userinfo.save();
-
-            println("subscribe sub%%******:::"+fromUserName+" subscribe:"+userinfo.subscribe)
-            userinfo.delete()
-            userinfo.errors.allErrors.each {
-                println "save AA userinfo error:"+it
+            if (!userinfo.hasErrors() && userinfo.save()) {
+                 println "save ok????"
+            }
+            else {
+                userinfo.errors.allErrors.each {
+                    println "save userinfo error:"+it
+                }
             }
 
+            println "tt::::::::"+userinfo.subscribe
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
             m.setContent("你发送的消息：subscribe"+userinfo.nickname);
             m.setCreateTime(1122l);
