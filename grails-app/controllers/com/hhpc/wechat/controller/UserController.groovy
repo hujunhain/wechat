@@ -41,7 +41,7 @@ class UserController {
     }
 
 
-    def create() {
+    def create= {
         // 将请求、响应的编码均设置为UTF-8（防止中文乱码）
         //  request.setCharacterEncoding("UTF-8");
         def code=params['code']
