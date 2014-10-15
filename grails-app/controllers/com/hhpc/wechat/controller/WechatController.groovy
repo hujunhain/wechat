@@ -211,6 +211,9 @@ class WechatController {
                    userinfo.createDate=new Date()
                    userinfo.save()
                }
+            userinfo.regionDate=new Date()
+            userinfo.update();
+
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
             m.setContent("你发送的消息：subscribe"+userinfo.nickname);
             m.setCreateTime(1122l);
@@ -228,10 +231,12 @@ class WechatController {
 
             def fromUserName= wxMessage.fromUserName
 
-            def userinfo=weChatService.userInfo(fromUserName,'zh')
-            userinfo.createDate=new Date();
+         //   def userinfo=weChatService.userInfo(fromUserName,'zh')
+
             userinfo=WxUser.findByOpenid(userinfo.openid)
             userinfo.subscribe=2
+
+            userinfo.update();
 
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
             m.setContent("你发送的消息：subscribe"+userinfo.nickname);
