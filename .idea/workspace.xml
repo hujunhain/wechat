@@ -27,8 +27,8 @@
       <file leaf-file-name="WechatController.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/hhpc/wechat/controller/WechatController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37325907" vertical-offset="3556" max-vertical-offset="4530">
-              <caret line="246" column="16" selection-start-line="246" selection-start-column="16" selection-end-line="246" selection-end-column="16" />
+            <state vertical-scroll-proportion="-0.37604457" vertical-offset="1635" max-vertical-offset="4530">
+              <caret line="100" column="172" selection-start-line="100" selection-start-column="172" selection-end-line="100" selection-end-column="172" />
               <folding>
                 <element signature="e#36#74#0" expanded="true" />
               </folding>
@@ -564,12 +564,12 @@
       <workItem from="1413255584994" duration="708000" />
       <workItem from="1413258505890" duration="1408000" />
       <workItem from="1413271215542" duration="3244000" />
-      <workItem from="1413354483738" duration="4226000" />
+      <workItem from="1413354483738" duration="4571000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18830000" />
+    <option name="totallyTimeSpent" value="19175000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="139" y="85" width="1083" height="732" extended-state="0" />
@@ -1041,8 +1041,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/hhpc/wechat/controller/WechatController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37325907" vertical-offset="3556" max-vertical-offset="4530">
-          <caret line="246" column="16" selection-start-line="246" selection-start-column="16" selection-end-line="246" selection-end-column="16" />
+        <state vertical-scroll-proportion="-0.37604457" vertical-offset="1635" max-vertical-offset="4530">
+          <caret line="100" column="172" selection-start-line="100" selection-start-column="172" selection-end-line="100" selection-end-column="172" />
           <folding>
             <element signature="e#36#74#0" expanded="true" />
           </folding>

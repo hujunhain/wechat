@@ -98,7 +98,7 @@ class WechatController {
         WxMenu.WxMenuButton button30 = new WxMenu.WxMenuButton();
         button30.setType("view");
         button30.setName("注册");
-        button30.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${weChatService.wxConfig.appId}&redirect_uri=http://${weChatService.serverIp}/user/region&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
+        button30.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${weChatService.wxConfig.appId}&redirect_uri=http://${weChatService.serverIp}/user/create&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
 
         println button30.url
 
