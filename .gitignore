@@ -9,6 +9,7 @@
 .project
 grails.*
 wecha.*
+/.idea
 
 /grails-app/conf/DataSource.groovy
 /grails-app/conf/Config.groovy

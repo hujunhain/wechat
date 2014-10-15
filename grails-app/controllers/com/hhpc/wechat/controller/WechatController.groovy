@@ -149,6 +149,7 @@ class WechatController {
 
             router
                     .rule().async(false).event(WxConsts.EVT_SUBSCRIBE).handler(new WxSubMessageHandler()).end()
+                    .rule().async(false).event(WxConsts.EVT_UNSUBSCRIBE).handler(new WxUnSubMessageHandler()).end()
                     .rule().async(false).handler(new WxEchoMessageHandler(sb, WxConsts.XML_MSG_TEXT)).end()
             //   router.rule().async(false).msgType(WxConsts.XML_MSG_TEXT).handler(handler(sb, WxConsts.XML_MSG_TEXT)).end()
 
