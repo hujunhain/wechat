@@ -205,13 +205,15 @@ class WechatController {
         public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
 
             def fromUserName= wxMessage.fromUserName
-            def userinfo=weChatService.userInfo(fromUserName,'zh')
+            def userinfo=WxUser.findByOpenid(fromUserName)
+               userinfo=weChatService.userInfo(fromUserName,'zh')
+
             userinfo.createDate=new Date();
-               if(!WxUser.findByOpenid(userinfo.openid)) {
+               if(!userinfo.id) {
                    userinfo.createDate=new Date()
-                   userinfo.save()
+                 //  userinfo.save()
                }
-            userinfo.regionDate=new Date()
+          //  userinfo.regionDate=new Date()
             userinfo.save();
 
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
@@ -232,7 +234,7 @@ class WechatController {
             def fromUserName= wxMessage.fromUserName
 
          //   def userinfo=weChatService.userInfo(fromUserName,'zh')
-
+println("un sub%%******:::"+fromUserName)
            def userinfo=WxUser.findByOpenid(fromUserName)
             userinfo.subscribe=2
 
