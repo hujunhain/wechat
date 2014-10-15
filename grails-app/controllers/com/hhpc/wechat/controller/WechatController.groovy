@@ -205,8 +205,10 @@ class WechatController {
         public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
 
             def fromUserName= wxMessage.fromUserName
-            def userinfo=WxUser.findByOpenidLike(fromUserName)
-               userinfo=weChatService.userInfo(fromUserName,'zh')
+          //  def userinfo=WxUser.findByOpenidLike(fromUserName)
+            WxUser userinfo=WxUser.findByOpenidLike(fromUserName)
+
+               // userinfo=weChatService.userInfo(fromUserName,'zh')
             println "ss"
             println "ss"
             println "s"
@@ -246,13 +248,13 @@ println "UU"
             println "UU"
 
             WxUser userinfo=WxUser.findByOpenidLike(fromUserName)
-            userinfo.subscribe=2
+            userinfo.subscribe=false
             println("un sub%%******:::"+fromUserName+" id:"+userinfo.id)
 
             userinfo.save();
 
             println("subscribe sub%%******:::"+fromUserName+" subscribe:"+userinfo.subscribe)
-
+          //  userinfo.delete()
             userinfo.errors.allErrors.each {
                 println "save AA userinfo error:"+it
             }
