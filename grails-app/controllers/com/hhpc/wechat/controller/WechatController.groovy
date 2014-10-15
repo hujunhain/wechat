@@ -205,7 +205,7 @@ class WechatController {
         public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
 
             def fromUserName= wxMessage.fromUserName
-            def userinfo=WxUser.findByOpenid(fromUserName)
+            def userinfo=WxUser.findByOpenidLike(fromUserName)
                userinfo=weChatService.userInfo(fromUserName,'zh')
             println "ss"
             println "ss"
@@ -245,7 +245,7 @@ println "UU"
 println "UU"
             println "UU"
 
-           def userinfo=WxUser.findByOpenid(fromUserName)
+           def userinfo=WxUser.findByOpenidLike(fromUserName)
             userinfo.subscribe=2
             println("un sub%%******:::"+fromUserName+" id:"+userinfo)
 
