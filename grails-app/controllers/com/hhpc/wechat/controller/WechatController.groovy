@@ -219,6 +219,10 @@ class WechatController {
           //  userinfo.regionDate=new Date()
             userinfo.save();
 
+            userinfo.errors.allErrors.each {
+                println "save SS userinfo error:"+it
+            }
+
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
             m.setContent("你发送的消息：subscribe"+userinfo.nickname);
             m.setCreateTime(1122l);
@@ -240,11 +244,16 @@ class WechatController {
 println "UU"
 println "UU"
             println "UU"
-println("un sub%%******:::"+fromUserName)
+
            def userinfo=WxUser.findByOpenid(fromUserName)
             userinfo.subscribe=2
+            println("un sub%%******:::"+fromUserName+" id:"+userinfo)
 
             userinfo.save();
+
+            userinfo.errors.allErrors.each {
+                println "save AA userinfo error:"+it
+            }
 
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
             m.setContent("你发送的消息：subscribe"+userinfo.nickname);
