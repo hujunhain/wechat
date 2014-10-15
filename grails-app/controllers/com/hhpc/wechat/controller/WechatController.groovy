@@ -205,10 +205,11 @@ class WechatController {
         public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
 
             def fromUserName= wxMessage.fromUserName
-          //  def userinfo=WxUser.findByOpenidLike(fromUserName)
             WxUser userinfo=WxUser.findByOpenidLike(fromUserName)
 
+
                def wxuserinfo=weChatService.userInfo(fromUserName,'zh')
+            if(!userinfo)userinfo=wxuserinfo
             println "ss"
             println "ss"
             println "s"
