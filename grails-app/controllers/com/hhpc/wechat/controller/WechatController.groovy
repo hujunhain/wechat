@@ -233,7 +233,7 @@ class WechatController {
 
          //   def userinfo=weChatService.userInfo(fromUserName,'zh')
 
-            userinfo=WxUser.findByOpenid(userinfo.openid)
+           def userinfo=WxUser.findByOpenid(fromUserName)
             userinfo.subscribe=2
 
             userinfo.update();
