@@ -20,12 +20,18 @@ class UserController {
        def openid=params["openid"]
        def phoneNum=params['phoneNum']
        def realName=params['realName']
+       def postName=params['postName']
+       def deptName=params['deptName']
+
         println "openid:"+openid+"phoneNum:"+phoneNum
         def userinfo=  WxUser.findByOpenid(openid)
         userinfo.realName=realName
         userinfo.phoneNum=phoneNum
         userinfo.regionDate=new Date();
-        userinfo.save()
+        userinfo.postName=postName
+        userinfo.deptName=deptName
+        
+        userService.save(userinfo)
         println "save:::::"+userinfo
 
         redirect(action:"show" ,id:userinfo.id)
