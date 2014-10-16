@@ -43,7 +43,7 @@
 
         <div style="width: 288px; height: 200px; position: relative; background-color: #fbfbfb; border: 1px solid #b8b8b8;"
              data-controltype="image">
-            <img src="${userinfo?.getHeadimgurl()}" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px">
+            <img src="${userinfo?.getHeadimgurl()}" alt="image">
         </div>
 
     </div>
