@@ -20,6 +20,7 @@ class WechatController {
 
     def weChatService
     def parseSmsService
+    def userService
 
 
    def indexX(){
@@ -228,9 +229,7 @@ class WechatController {
                 }
             }
 
-            userinfo.errors.allErrors.each {
-                println "save SS userinfo error:"+it
-            }
+            userService.save(userinfo)
 
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
             m.setContent("你发送的消息：subscribe"+userinfo.nickname);
@@ -258,7 +257,7 @@ println "UU"
             println "UU"+userinfo.subscribe
             userinfo.setSubscribe(false)
             println("un sub%%******:::"+fromUserName+" id:"+userinfo.id)
-
+            userService.save(userinfo)
             if (!userinfo.hasErrors() && userinfo.save()) {
                  println "save ok????"
             }

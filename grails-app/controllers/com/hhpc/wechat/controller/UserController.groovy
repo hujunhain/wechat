@@ -34,6 +34,8 @@ class UserController {
         def id=params['id']
 
         def userinfo=  WxUser.get(id)
+        userinfo.realName="A:"+userinfo.realName
+        userService.save(userinfo)
 
         println "userinfo  id:"+userinfo?.id+" name:"+userinfo.realName
         [userinfo:userinfo]
