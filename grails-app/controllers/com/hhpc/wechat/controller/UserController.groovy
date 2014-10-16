@@ -30,7 +30,7 @@ class UserController {
         userinfo.regionDate=new Date();
         userinfo.postName=postName
         userinfo.deptName=deptName
-        
+
         userService.save(userinfo)
         println "save:::::"+userinfo
 
@@ -42,7 +42,7 @@ class UserController {
 
         def userinfo=  WxUser.get(id)
         userinfo.realName="A:"+userinfo.realName
-        userService.save(userinfo)
+      //  userService.save(userinfo)
 
         println "userinfo  id:"+userinfo?.id+" name:"+userinfo.realName
         [userinfo:userinfo]
