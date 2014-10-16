@@ -63,11 +63,26 @@
                 <div class="ui-block-a" style="width: 40%">
                     <div class="ui-bar ui-bar-a" style="height:60px">
 
+                        <label for="userStat">职位: </label></div>
+                </div>
+                <div class="ui-block-b"  style="width:60%">
+                    <div class="ui-bar ui-bar-a" style="height:60px">
+                        <select name="postName" id="postName">
+                            <option value="促销主管">促销主管</option>
+                            <option value="促销组长">促销组长</option>
+                            <option value="促销员">促销员</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="ui-block-a" style="width: 40%">
+                    <div class="ui-bar ui-bar-a" style="height:60px">
+
                         <label for="deptName">部门:</label></div>
                 </div>
                 <div class="ui-block-b"  style="width:60%">
                     <div class="ui-bar ui-bar-a" style="height:60px">
-                        <select name="deptName" id="deptName">
+                        <input type="text" name="deptName" id="deptName" placeholder="所属区域" value="">
+                       <!-- <select name="deptName" id="deptName">
                             <optgroup label="成都">
                                 <option value="1">成都A</option>
                                 <option value="2">成都B</option>
@@ -98,27 +113,12 @@
                                 </optgroup>
                             </optgroup>
                         </select>
-                    </div>
-                </div>
-                <div class="ui-block-a" style="width: 40%">
-                    <div class="ui-bar ui-bar-a" style="height:60px">
-
-                        <label for="userStat">职位: </label></div>
-                </div>
-                <div class="ui-block-b"  style="width:60%">
-                    <div class="ui-bar ui-bar-a" style="height:60px">
-                        职位
+                        -->
                     </div>
                 </div>
 
-                <div class="ui-field-contain">
-                    <label for="select-native-1">下拉列表:</label>
-                    <select name="postName" id="postName">
-                        <option value="促销主管">One</option>
-                        <option value="促销组长">Two</option>
-                        <option value="促销员">Three</option>
-                    </select>
-                </div>
+
+
             </div>
 
             <button class="ui-btn ui-shadow">Button</button>
