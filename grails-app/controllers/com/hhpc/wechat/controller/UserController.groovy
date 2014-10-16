@@ -2,7 +2,7 @@ package com.hhpc.wechat.controller
 
 import chanjarster.weixin.bean.result.WxUser
 import chanjarster.weixin.util.http.SimpleGetRequestExecutor
-import com.hhpc.SmsUtil
+ 
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONElement
 
