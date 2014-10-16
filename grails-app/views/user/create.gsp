@@ -110,6 +110,15 @@
                         职位
                     </div>
                 </div>
+
+                <div class="ui-field-contain">
+                    <label for="select-native-1">下拉列表:</label>
+                    <select name="postName" id="postName">
+                        <option value="促销主管">One</option>
+                        <option value="促销组长">Two</option>
+                        <option value="促销员">Three</option>
+                    </select>
+                </div>
             </div>
 
             <button class="ui-btn ui-shadow">Button</button>
