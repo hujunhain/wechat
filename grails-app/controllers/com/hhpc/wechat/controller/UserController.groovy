@@ -9,6 +9,7 @@ import org.codehaus.groovy.grails.web.json.JSONElement
 class UserController {
 
     def weChatService
+    def userService
 
     def index() {
 
