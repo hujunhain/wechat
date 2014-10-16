@@ -24,7 +24,7 @@ class UserController {
 
         def userinfo=  WxUser.get(7)
 
-        render([msg:"okkkn",status:1,code:200] as JSON )
+        render([msg:"okkkn",status:1,code:200,smsCode:1234] as JSON )
     }
     def save( ) {
 

@@ -16,11 +16,12 @@
         <h1>注册验证</h1>
     </div>
     <div data-role="content">
-        <form method="get" commandName="customer"
-              action="/user/save">
+        <form method="get" id="form" commandName="customer"
+              action="/user/save" data-ajax=“false">
 
             <input type="hidden" name="openid" id="userInfo.code" value="${openid}">
             <input type="hidden" name="id" id="userInfo.id" value="${id}">
+            <input type="hidden" name="id" id="sendCode" value="">
 
 
 
@@ -122,28 +123,54 @@
 
                         <label for="deptName">手机验证码:</label></div>
                 </div>
-                <div class="ui-block-b"  style="width:60%">
+                <div class="ui-block-b"  style="width:30%">
                     <div class="ui-bar ui-bar-a" style="height:60px">
                         <input type="text" name="smsCode" id="smsCode" placeholder="手机验证码" value="">
 
                         </div>
-                    <div class="ui-bar ui-bar-b" style="height:60px">
 
-                    <button id="codeagain"  class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right" >获取验证码</button>
-                    </div>
                 </div>
+
+                <div class="ui-block-c" style="width: 30%">
+                    <div class="ui-bar ui-bar-a" style="height:60px">
+
+                        <button id="codeagain"  class="ui-shadow ui-btn ui-corner-all " >获取验证码</button>
+                </div></div>
+
+                <div class="ui-block-b" style="width: 80%;align:center">
+                    <div class="ui-bar ui-bar-a" style="height:60px">
+
+
+                        <a href="#" id="submit" class="ui-shadow ui-btn ui-corner-all">提交</a>
+                    </div></div>
+
+
 
 
 
 
             </div>
 
-            <button class="ui-btn ui-shadow">Button</button>
+
         </form>
     </div>
 </div>
 </body>
 <script>
+
+    $(function(){
+        $('#submit').click(function(){
+           if( $("#sendCode").attr("value")==""){
+               alert('请获取手机验证短信');
+               return false
+           }
+            if($("#sendCode").attr("value")!=$("#sendCode").attr("smsCode")){
+                alert('请输入正确的验证号码');
+                return false
+            }
+            $('#form').submit()
+        })
+    })
 
     //重新获取验证码
     $('#codeagain').click(function() {
@@ -157,6 +184,7 @@
                 alert("status"+data.status+"code"+data.code)
                 if(data.status == 1 && data.code == 200){
                     alert("验证码已发送至您的手机");
+                    $("#sendCode").attr("value",data.smsCode)
                     get_code_time(o);
                 } else {
 
