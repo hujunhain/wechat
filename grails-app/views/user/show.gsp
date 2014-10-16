@@ -32,6 +32,8 @@
 
 
 
+
+
         <label for="userInfo.userName">ID:${userinfo?.id}</label>
         <label for="userInfo.userName">姓名:${userinfo?.getRealName()}</label>
         <label for="userInfo.userName">手机:${userinfo?.getPhoneNum()}</label>
@@ -48,5 +50,8 @@
 
     </div>
 </div>
+
+
 </body>
+
 </html>

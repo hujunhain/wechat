@@ -117,6 +117,23 @@
                     </div>
                 </div>
 
+                <div class="ui-block-a" style="width: 40%">
+                    <div class="ui-bar ui-bar-a" style="height:60px">
+
+                        <label for="deptName">手机验证码:</label></div>
+                </div>
+                <div class="ui-block-b"  style="width:60%">
+                    <div class="ui-bar ui-bar-a" style="height:60px">
+                        <input type="text" name="smsCode" id="smsCode" placeholder="手机验证码" value="">
+
+                        </div>
+                    <div class="ui-bar ui-bar-b" style="height:60px">
+
+                    <button id="codeagain"  class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right" >获取验证码</button>
+                    </div>
+                </div>
+
+
 
 
             </div>
@@ -126,4 +143,50 @@
     </div>
 </div>
 </body>
+<script>
+
+    //重新获取验证码
+    $('#codeagain').click(function() {
+        var o = this;
+        $.ajax({
+            url:"/user/sendCode?jsoncallback=?",
+            type:"get",
+            data: {accountId:"accountId"},
+            //  dataType: "json",
+            success: function (data) {
+                alert("status"+data.status+"code"+data.code)
+                if(data.status == 1 && data.code == 200){
+                    alert("验证码已发送至您的手机");
+                    get_code_time(o);
+                } else {
+
+                    if(data.msg != ""){
+                        alert("msg:"+data.msg);
+                    } else {
+                        alert("短信验证码发送失败!!!");
+                    }
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                alert("err:" +XMLHttpRequest.status + XMLHttpRequest.responseText);
+            }
+        });
+    });
+
+    var wait = 60;
+    get_code_time = function (o) {
+        if (wait == 0) {
+            o.removeAttribute("disabled");
+            o.innerText = "获取验证码";
+            wait = 60;
+        } else {
+            o.setAttribute("disabled", true);
+            o.innerText = "(" + wait + ")秒后重新获取";
+            wait--;
+            setTimeout(function() {
+                get_code_time(o)
+            }, 1000)
+        }
+    }
+</script>
 </html>

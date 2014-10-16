@@ -2,6 +2,7 @@ package com.hhpc.wechat.controller
 
 import chanjarster.weixin.bean.result.WxUser
 import chanjarster.weixin.util.http.SimpleGetRequestExecutor
+import com.hhpc.SmsUtil
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONElement
 
@@ -10,10 +11,20 @@ class UserController {
 
     def weChatService
     def userService
+    def SmsService
 
     def index() {
 
 
+    }
+    def sendCode={
+        //render {abc:'123'} as JSON
+
+        println "^^^^^^sendCodesendCodesendCodesendCodesendCodesendCode&&^^^^^"
+
+        def userinfo=  WxUser.get(7)
+
+        render([msg:"okkkn",status:1,code:200] as JSON )
     }
     def save( ) {
 
@@ -45,6 +56,11 @@ class UserController {
       //  userService.save(userinfo)
 
         println "userinfo  id:"+userinfo?.id+" name:"+userinfo.realName
+
+        def rmd= SmsService.createRandom(true,4);
+      // def smsId= smsService.send("13928080276",rmd)
+      //  println "smsId::"+smsId
+
         [userinfo:userinfo]
 
     }
