@@ -234,15 +234,20 @@
             }
         });
     });
-
+    var clicked = false;
     var wait = 120;
     get_code_time = function (o) {
         if (wait == 0) {
-            o.removeAttribute("disabled");
+          //  o.removeAttribute("disabled");
+
+            $(o).removeClass('ui-disabled');
+            clicked = false;
             o.innerText = "获取验证码";
             wait = 120;
         } else {
-            o.setAttribute("disabled", true);
+           // o.setAttribute("disabled", true);
+            $(o).addClass('ui-disabled');
+            clicked = true;
             o.innerText = "(" + wait + ")秒后重新获取";
             wait--;
             setTimeout(function() {
