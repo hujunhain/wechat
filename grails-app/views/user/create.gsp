@@ -136,7 +136,7 @@
                 <div class="ui-block-c" style="width: 30%">
                     <div class="ui-bar ui-bar-a" style="height:60px">
 
-                        <button id="codeagain"  class="ui-shadow ui-btn ui-corner-all " >获取验证码</button>
+                        <a href="#" id="codeagain"  class="ui-shadow ui-btn ui-corner-all " >获取验证码</a>
                 </div></div>
 
                 <div class="ui-block-b" style="width: 80%;align:center">

@@ -29,7 +29,7 @@ class UserController {
         def phoneNum=params['phoneNum']
 
         def rmd= SmsService.createRandom(true,4);
-       // def smsId= smsService.send(phoneNum,rmd)
+        def smsId= smsService.send(phoneNum,rmd)
 
         render([msg:"ok",status:1,code:200,smsCode:rmd,smsIdx:smsIdx+1] as JSON )
     }
