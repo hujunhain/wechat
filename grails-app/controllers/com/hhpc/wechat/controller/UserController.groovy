@@ -21,10 +21,17 @@ class UserController {
         //render {abc:'123'} as JSON
 
         println "^^^^^^sendCodesendCodesendCodesendCodesendCodesendCode&&^^^^^"
+        println "params       :"+params
 
-        def userinfo=  WxUser.get(7)
+       // def userinfo=  WxUser.get(7)
+        def openid=params["openid"]
+        def smsIdx=params.int('smsIdx')
+        def phoneNum=params['phoneNum']
 
-        render([msg:"okkkn",status:1,code:200,smsCode:1234] as JSON )
+        def rmd= SmsService.createRandom(true,4);
+       // def smsId= smsService.send(phoneNum,rmd)
+
+        render([msg:"ok",status:1,code:200,smsCode:rmd,smsIdx:smsIdx+1] as JSON )
     }
     def save( ) {
 
@@ -57,8 +64,7 @@ class UserController {
 
         println "userinfo  id:"+userinfo?.id+" name:"+userinfo.realName
 
-        def rmd= SmsService.createRandom(true,4);
-      // def smsId= smsService.send("13928080276",rmd)
+
       //  println "smsId::"+smsId
 
         [userinfo:userinfo]

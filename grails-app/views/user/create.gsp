@@ -22,6 +22,8 @@
             <input type="hidden" name="openid" id="userInfo.code" value="${openid}">
             <input type="hidden" name="id" id="userInfo.id" value="${id}">
             <input type="hidden" name="id" id="sendCode" value="">
+            <input type="hidden" name="smsIdx" id="smsIdx" value="0">
+
 
 
 
@@ -174,17 +176,30 @@
 
     //重新获取验证码
     $('#codeagain').click(function() {
+
+
+       var validateReg = /^((\+?86)|(\(\+86\)))?1\d{10}$/;
+        if( !validateReg.test($("#phoneNum").val())){
+
+           alert("请输入正确的手机号码！");
+        }
+        if($("#smsIdx").val()==3){
+            alert("手机短信验证次数超过3次，不能再验证了，请联系系统管理员！");
+        }
+
         var o = this;
         $.ajax({
             url:"/user/sendCode?jsoncallback=?",
             type:"get",
-            data: {accountId:"accountId"},
+            data: {smsIdx:$("#smsIdx").val(),phoneNum:$("#phoneNum").val()},
             //  dataType: "json",
             success: function (data) {
                 alert("status"+data.status+"code"+data.code)
                 if(data.status == 1 && data.code == 200){
                     alert("验证码已发送至您的手机");
                     $("#sendCode").attr("value",data.smsCode)
+                    $("#smsIdx").attr("value",data.smsIdx)
+
                     get_code_time(o);
                 } else {
 
@@ -201,12 +216,12 @@
         });
     });
 
-    var wait = 60;
+    var wait = 120;
     get_code_time = function (o) {
         if (wait == 0) {
             o.removeAttribute("disabled");
             o.innerText = "获取验证码";
-            wait = 60;
+            wait = 120;
         } else {
             o.setAttribute("disabled", true);
             o.innerText = "(" + wait + ")秒后重新获取";
