@@ -18,6 +18,21 @@ class UserController {
 
 
     }
+    def manager={
+
+        def code=params['code']
+        response.setCharacterEncoding("UTF-8");
+        def url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=${weChatService.wxConfig.appId}&secret=${weChatService.wxConfig.secret}&code=${code}&grant_type=authorization_code"
+        println ""+url
+        def jsonStr ="{openid:def}"
+        if(code)jsonStr=weChatService.wxService.execute(new SimpleGetRequestExecutor(), url, null);
+        JSONElement jsonObject = JSON.parse(jsonStr)
+
+        def openid=jsonObject.get("openid")
+        def userinfo= WxUser.findByOpenid(openid)
+
+       def sellerList=Seller.findAllWxUserIdIsNotNull()
+    }
     def sendCode={
         //render {abc:'123'} as JSON
 

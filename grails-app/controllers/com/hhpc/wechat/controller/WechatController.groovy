@@ -53,7 +53,7 @@ class WechatController {
         //   button2.setKey("V1001_TODAY_SINGER");
 
         WxMenu.WxMenuButton button3 = new WxMenu.WxMenuButton();
-        button3.setName("菜单");
+        button3.setName("促销");
 
         menu.getButton().add(button1);
         menu.getButton().add(button2);
@@ -98,15 +98,15 @@ class WechatController {
 
         WxMenu.WxMenuButton button30 = new WxMenu.WxMenuButton();
         button30.setType("view");
-        button30.setName("A注册");
+        button30.setName("注册");
         button30.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${weChatService.wxConfig.appId}&redirect_uri=http://${weChatService.serverIp}/user/create&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
 
         println button30.url
 
         WxMenu.WxMenuButton button31 = new WxMenu.WxMenuButton();
         button31.setType("view");
-        button31.setName("搜索");
-        button31.setUrl("http://www.soso.com/");
+        button31.setName("管理");
+        button30.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${weChatService.wxConfig.appId}&redirect_uri=http://${weChatService.serverIp}/user/manager&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
 
         WxMenu.WxMenuButton button32 = new WxMenu.WxMenuButton();
         button32.setType("view");
