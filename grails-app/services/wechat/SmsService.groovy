@@ -16,7 +16,7 @@ class SmsService {
 
     public   String send(def number,def msg){
         // number="13928080276"
-        msg ="这是测试短消息:"+msg
+        msg ="华海鹏城微信注册验证码:"+msg
 
         def user=grailsApplication.config.sms.mobset.user
         def passwd=grailsApplication.config.sms.mobset.passwd
