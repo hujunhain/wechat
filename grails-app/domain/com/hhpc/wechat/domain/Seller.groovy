@@ -10,15 +10,18 @@ class Seller {
     TDIf status;//在职状态
     String mobile // 手机号码
     Date createTime
-    MergerSms lastSms // 最新一条记录
-
+   // MergerSms lastSms // 最新一条记录
+    Integer wx_user_id //微信id
+    String postName //职位
+    String deptName //区域部门
     Integer wxUserId //微信id
 
     static constraints = {
         mobile(nullable: true, maxSize: 50)
-        lastSms(nullable: true)
+       // lastSms(nullable: true)
         wxUserId(nullable: true)
-        //status=PostStatus.findByName("在职")
+        postName(nullable: true)
+        deptName(nullable: true)
     }
 
     public Seller() {

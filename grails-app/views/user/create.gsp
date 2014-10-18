@@ -199,7 +199,6 @@
 
        var validateReg = /^((\+?86)|(\(\+86\)))?1\d{10}$/;
         if( !validateReg.test($("#phoneNum").val())){
-
            alert("请输入正确的手机号码！");
             return false
         }
@@ -215,7 +214,6 @@
             data: {smsIdx:$("#smsIdx").val(),phoneNum:$("#phoneNum").val()},
             //  dataType: "json",
             success: function (data) {
-                alert("status"+data.status+"code"+data.code)
                 if(data.status == 1 && data.code == 200){
                     alert("验证码已发送至您的手机");
                     $("#sendCode").attr("value",data.smsCode)
