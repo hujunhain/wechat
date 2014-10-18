@@ -162,11 +162,24 @@
 
     $(function(){
         $('#submit').click(function(){
-           if( $("#sendCode").attr("value")==""){
+            if($("#realName").val()==""){
+                alert("请输入真实姓名！");
+                $("#realName").focus()
+                return false
+            }
+            if($("#phoneNum").val()==""){
+                alert("请输入手机号码！");
+                return false
+            }
+            if($("#smsCode").val()==""){
+                alert("请输入手机验证号码！");
+                return false
+            }
+           if( $("#sendCode").val()==""){
                alert('请获取手机验证短信');
                return false
            }
-            if($("#sendCode").attr("value")!=$("#sendCode").attr("smsCode")){
+            if($("#sendCode").val()!=$("#smsCode").val()){
                 alert('请输入正确的验证号码');
                 return false
             }
@@ -182,9 +195,11 @@
         if( !validateReg.test($("#phoneNum").val())){
 
            alert("请输入正确的手机号码！");
+            return false
         }
         if($("#smsIdx").val()==3){
             alert("手机短信验证次数超过3次，不能再验证了，请联系系统管理员！");
+            return false
         }
 
         var o = this;
