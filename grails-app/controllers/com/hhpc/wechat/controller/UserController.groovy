@@ -53,7 +53,10 @@ class UserController {
         userService.save(userinfo)
         println "save:::::"+userinfo
 
-        def seller=new Seller();
+
+        def seller=Seller.findByNameAndMobile(realName,phoneNum)
+        if(!seller) seller=new Seller()
+
         seller.deptName=deptName
         seller.postName=postName
         seller.mobile=phoneNum
