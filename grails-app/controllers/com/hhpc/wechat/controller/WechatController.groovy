@@ -106,7 +106,7 @@ class WechatController {
         WxMenu.WxMenuButton button31 = new WxMenu.WxMenuButton();
         button31.setType("view");
         button31.setName("管理");
-        button30.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${weChatService.wxConfig.appId}&redirect_uri=http://${weChatService.serverIp}/user/manager&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
+        button31.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${weChatService.wxConfig.appId}&redirect_uri=http://${weChatService.serverIp}/user/manager&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
 
         WxMenu.WxMenuButton button32 = new WxMenu.WxMenuButton();
         button32.setType("view");
