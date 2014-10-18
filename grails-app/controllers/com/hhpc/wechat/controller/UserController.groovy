@@ -2,7 +2,8 @@ package com.hhpc.wechat.controller
 
 import chanjarster.weixin.bean.result.WxUser
 import chanjarster.weixin.util.http.SimpleGetRequestExecutor
- 
+import com.hhpc.wechat.domain.Seller
+import com.hhpc.wechat.domain.TDIf
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONElement
 
@@ -51,6 +52,15 @@ class UserController {
 
         userService.save(userinfo)
         println "save:::::"+userinfo
+
+        def seller=new Seller();
+        seller.deptName=deptName
+        seller.postName=postName
+        seller.mobile=phoneNum
+        seller.status= TDIf.get(2) //否
+        seller.wxUserId=userinfo.id
+        seller.save()
+
 
         redirect(action:"show" ,id:userinfo.id)
     }
