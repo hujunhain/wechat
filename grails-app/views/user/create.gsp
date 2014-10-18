@@ -125,7 +125,7 @@
 
                         <label for="deptName">手机验证码:</label></div>
                 </div>
-                <div class="ui-block-b"  style="width:30%">
+                <div class="ui-block-b"  style="width:60%">
                     <div class="ui-bar ui-bar-a" style="height:60px">
                         <input type="text" name="smsCode" id="smsCode" placeholder="手机验证码" value="">
 
@@ -133,18 +133,24 @@
 
                 </div>
 
-                <div class="ui-block-c" style="width: 30%">
-                    <div class="ui-bar ui-bar-a" style="height:60px">
 
-                        <a href="#" id="codeagain"  class="ui-shadow ui-btn ui-corner-all " >获取验证码</a>
-                </div></div>
 
                 <div class="ui-block-b" style="width: 80%;align:center">
-                    <div class="ui-bar ui-bar-a" style="height:60px">
+
+                    <div class="ui-block-c" style="width: 60%">
+                        <div class="ui-bar ui-bar-a" style="height:60px">
+
+                            <a href="#" id="codeagain"  class="ui-shadow ui-btn ui-corner-all " >获取验证码</a>
+                        </div>
+                    </div>
+
+                    <div class="ui-bar ui-bar-a" style="height:40px">
 
 
                         <a href="#" id="submit" class="ui-shadow ui-btn ui-corner-all">提交</a>
-                    </div></div>
+                    </div>
+
+                </div>
 
 
 
