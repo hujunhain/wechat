@@ -47,6 +47,8 @@ class UserController {
         def phoneNum=params['phoneNum']
 
         def rmd= SmsService.createRandom(true,4);
+        def  msg ="华海鹏城微信注册验证码:"+rmd
+
         def smsId= smsService.send(phoneNum,rmd)
 
         render([msg:"ok",status:1,code:200,smsCode:rmd,smsIdx:smsIdx+1] as JSON )
@@ -79,7 +81,14 @@ class UserController {
         seller.mobile=phoneNum
         seller.status= TDIf.get(2) //否
         seller.wxUserId=userinfo.id
-        seller.save()
+
+        seller.save();
+        println "seller save:::"+seller.id
+        userService.saveSeller(seller)
+        println "******* seller save:::"+seller.id
+
+
+
 
 
         redirect(action:"show" ,id:userinfo.id)

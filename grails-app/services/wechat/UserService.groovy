@@ -1,12 +1,24 @@
 package wechat
 
 import chanjarster.weixin.bean.result.WxUser
+import com.hhpc.wechat.domain.Seller
 import grails.transaction.Transactional
 
 @Transactional
 class UserService {
 
     def serviceMethod() {
+
+    }
+
+    def saveSeller(def seller) {
+
+
+        Seller.withTransaction { status ->
+            println "seller status:" + status
+            seller.save();
+            println "seller bbbbb  status:" + status
+        }
 
     }
 
