@@ -53,6 +53,10 @@ class UserController {
 
         render([msg:"ok",status:1,code:200,smsCode:rmd,smsIdx:smsIdx+1] as JSON )
     }
+    def audit={
+        println "audit:"+params
+
+    }
     def save( ) {
 
        def openid=params["openid"]

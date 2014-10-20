@@ -28,13 +28,19 @@
             <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
             <div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Block D</div></div>
         </div>
+        <form method="get" id="form" commandName="customer"
+              action="/user/audit" data-ajax=“false">
         <% sellerList.each { seller -> %>
 
         <div class="ui-grid-c">
            <input type="hidden" id="sellerId" value="${seller.id}">
             <div class="ui-block-a" style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.status.name=="否"?"selected":"bb"}${seller.name}</div></div>
-            <div class="ui-block-b"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.deptName}</div></div>
-            <div class="ui-block-c"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.mobile}</div></div>
+            <div class="ui-block-b"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.mobile}</div></div>
+            <div class="ui-block-c"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">
+
+                <input type="text" name="deptName id="deptName" placeholder="所属部门" value=" ${seller.deptName}">
+            </div></div>
+
             <div class="ui-block-d" style="width: 40%" > <div class="ui-bar ui-bar-a" style="height:60px">
                 <select name="select-native-1" id="select-native-1">
                     <option value="1" ${seller.status.name=="是"?"selected":""}>是</option>
@@ -45,8 +51,7 @@
 
     </div>
         <%}%>
-        <form method="get" id="form" commandName="customer"
-              action="/user/saveXX" data-ajax=“false">
+
 
 
 
