@@ -32,13 +32,13 @@
 
         <div class="ui-grid-c">
            <input type="hidden" id="sellerId" value="${seller.id}">
-            <div class="ui-block-a" style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.status=="是"?"selected":""}${seller.name}</div></div>
+            <div class="ui-block-a" style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.status=="否"?"selected":""}${seller.name}</div></div>
             <div class="ui-block-b"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.deptName}</div></div>
             <div class="ui-block-c"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.mobile}</div></div>
             <div class="ui-block-d" style="width: 40%" > <div class="ui-bar ui-bar-a" style="height:60px">
                 <select name="select-native-1" id="select-native-1">
                     <option value="1" ${seller.status=="是"?"selected":""}>是</option>
-                    <option value="2" ${seller.status=="否"?"selected":""} selected>否</option>
+                    <option value="2" ${seller.status=="否"?"selected":"selected"} >否</option>
                  </select>
 
                 </div></div>
