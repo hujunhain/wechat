@@ -14,6 +14,7 @@ class Seller {
     String postName //职位
     String deptName //区域部门
     Integer wxUserId //微信id
+    String nickname //微信名称
 
     static constraints = {
         mobile(nullable: true, maxSize: 50)
@@ -21,6 +22,7 @@ class Seller {
         wxUserId(nullable: true)
         postName(nullable: true)
         deptName(nullable: true)
+        nickname(nullable: true)
     }
 
     public Seller() {

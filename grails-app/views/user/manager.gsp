@@ -27,18 +27,22 @@
             <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
             <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
             <div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Block D</div></div>
-        </div><!-- /grid-c -->
+        </div>
+        <% sellerList.each { seller -> %>
+
         <div class="ui-grid-c">
-            <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
-            <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
-            <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
-            <div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Block D</div></div>
-        </div><!-- /grid-c -->
+           <input type="hidden" id="sellerId" value="${seller.id}">
+            <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">${seller.name}</div></div>
+            <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">${seller.mobile}</div></div>
+            <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">${seller.deptName}</div></div>
+            <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">${seller.nickname}</div></div>
+            <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">${seller.status}</div></div>
+
+    </div>
+        <%}%>
         <form method="get" id="form" commandName="customer"
               action="/user/saveXX" data-ajax=“false">
-            <% sellerList.each { seller -> %>
-            <p><%="Hello ${seller}!" %></p>
-            <%}%>
+
 
 
             </form>
