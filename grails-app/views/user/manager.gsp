@@ -37,8 +37,8 @@
             <div class="ui-block-c"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.mobile}</div></div>
             <div class="ui-block-d" style="width: 40%" > <div class="ui-bar ui-bar-a" style="height:60px">
                 <select name="select-native-1" id="select-native-1">
-                    <option value="small">是</option>
-                    <option value="medium">否</option>
+                    <option value="1" >是</option>
+                    <option value="2" selected>否</option>
                  </select>
 
                 </div></div>
