@@ -26,7 +26,7 @@ class UserController {
          def openid= userService.getOpenidByCode(code)
         def userinfo= WxUser.findByOpenid(openid)
 
-       def sellerList=Seller.findAllByWxUserIdIsNotNull()
+       def sellerList=Seller.findAllByWxUserIdIsNotNull( [max: 3, offset: 2, sort: "id", order: "desc"])
         println "sellerList:"+sellerList.size()
         [sellerList:sellerList]
     }
