@@ -58,6 +58,9 @@
 
             <input type="submit" value="提交">
             </form>
+        <g:paginate next="Forward" prev="Back"
+                    maxsteps="0" controller="book"
+                    action="list" total="${sellerCount}" />
         </div>
     </div>
 </body>

@@ -28,6 +28,7 @@ class UserController {
 
        def sellerList=Seller.findAllByWxUserIdIsNotNull( [max: 3, offset: offset, sort: "id", order: "desc"])
         println "sellerList:"+sellerList.size()
+        def sellerCount=10
         [sellerList:sellerList]
     }
     def sendCode={
@@ -158,7 +159,7 @@ class UserController {
         def seller=Seller.findByWxUserId(userinfo.id)
         if(seller.status.name=="是"){
 
-            render "你的微信号已经绑定，不用再绑定注册了！！！"
+            render "你的微信号和手机号已经绑定且有效，不用再绑定注册了！！！"
         }
 
         [openid:openid,nickname:userinfo.nickname,id:userinfo.id];
