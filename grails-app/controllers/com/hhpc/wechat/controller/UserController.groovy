@@ -31,7 +31,7 @@ class UserController {
         def openid=jsonObject.get("openid")
         def userinfo= WxUser.findByOpenid(openid)
 
-       def sellerList=Seller.findAllWxUserIdIsNotNull()
+       def sellerList=Seller.findAllByWxUserIdIsNotNull()
     }
     def sendCode={
         //render {abc:'123'} as JSON
