@@ -59,8 +59,8 @@ class UserController {
             def statusId=params.list('statusId').get(idx)
             seller.deptName=deptName
             seller.status=TDIf.get(statusId)
-            
-            if (!seller.hasErrors() && seller.save()) {
+
+            if (!seller.hasErrors() && seller.save(flush: true)) {
                 println "seller save ok!"+seller.id
             }
             else {
