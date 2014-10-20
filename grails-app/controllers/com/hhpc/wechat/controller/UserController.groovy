@@ -59,7 +59,15 @@ class UserController {
             def statusId=params.list('statusId').get(idx)
             seller.deptName=deptName
             seller.status=TDIf.get(statusId)
-            seller.save()
+            
+            if (!seller.hasErrors() && seller.save()) {
+                println "seller save ok!"+seller.id
+            }
+            else {
+                seller.errors.allErrors.each {
+                    println "save seller error:"+it
+                }
+            }
             println "sellerIdsellerIdsellerId:::::::::::::::::"+sellerId
         }
         render ""+params
