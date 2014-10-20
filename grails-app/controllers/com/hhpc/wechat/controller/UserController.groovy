@@ -93,8 +93,7 @@ class UserController {
         }
 
         println "seller save:::"+seller.id
-        userService.saveSeller(seller)
-        println "******* seller save:::"+seller.id
+
 
 
 

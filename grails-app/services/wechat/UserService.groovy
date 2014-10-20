@@ -11,16 +11,7 @@ class UserService {
 
     }
 
-    def saveSeller(def seller) {
 
-
-        Seller.withTransaction { status ->
-            println "seller status:" + status
-            seller.save();
-            println "seller bbbbb  status:" + status
-        }
-
-    }
 
     def save(WxUser user) {
 
