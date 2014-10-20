@@ -51,8 +51,8 @@ class UserController {
     def audit={
         println "audit:"+params
 
-        params.list('sellerId').each{sellerId,idx->
-            println "it"+sellerId+"  idx:"+idx
+        params.list('sellerId').each{sellerId->
+            println "it"+sellerId
 
 //            sellerId,idx->
 //            def seller= Seller.get(sellerId)
