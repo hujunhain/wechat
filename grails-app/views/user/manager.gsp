@@ -34,8 +34,8 @@
            <input type="hidden" id="sellerId" value="${seller.id}">
             <div class="ui-block-a" style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.name}</div></div>
             <div class="ui-block-b"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.deptName}</div></div>
-            <div class="ui-block-c"  style="width: 30%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.mobile}</div></div>
-            <div class="ui-block-d" style="width: 30%" > <div class="ui-bar ui-bar-a" style="height:60px">
+            <div class="ui-block-c"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.mobile}</div></div>
+            <div class="ui-block-d" style="width: 40%" > <div class="ui-bar ui-bar-a" style="height:60px">
                 <select name="select-native-1" id="select-native-1">
                     <option value="small">One</option>
                     <option value="medium">Two</option>
