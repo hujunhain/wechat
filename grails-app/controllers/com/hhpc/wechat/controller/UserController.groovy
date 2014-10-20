@@ -152,8 +152,7 @@ class UserController {
         println "A"
 
         def openid= userService.getOpenidByCode(code)
-        if(code)openid=jsonObject.get("openid")
-        else openid='ok_busih96pQuC0C1iUuh2KC_iA0'
+       // else openid='ok_busih96pQuC0C1iUuh2KC_iA0'
         def userinfo= WxUser.findByOpenid(openid)
 
         def seller=Seller.findByWxUserId(userinfo.id)
