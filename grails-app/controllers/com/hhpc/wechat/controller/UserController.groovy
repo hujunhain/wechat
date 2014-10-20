@@ -82,7 +82,15 @@ class UserController {
         seller.status= TDIf.get(2) //否
         seller.wxUserId=userinfo.id
 
-        seller.save();
+        if (!seller.hasErrors() && seller.save()) {
+            println "seller save ok!"+seller.id
+        }
+        else {
+            seller.errors.allErrors.each {
+                println "save seller error:"+it
+            }
+        }
+
         println "seller save:::"+seller.id
         userService.saveSeller(seller)
         println "******* seller save:::"+seller.id
