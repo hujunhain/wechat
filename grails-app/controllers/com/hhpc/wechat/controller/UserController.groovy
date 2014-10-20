@@ -51,16 +51,15 @@ class UserController {
     def audit={
         println "audit:"+params
 
-        params.list('sellerId').each{sellerId->
+        params.list('sellerId').eachWithIndex{sellerId,idx->
             println "it"+sellerId
 
-//            sellerId,idx->
-//            def seller= Seller.get(sellerId)
-//            def deptName=params.list('deptName').get(idx)
-//            def statusId=params.list('statusId').get(idx)
-//            seller.deptName=deptName
-//            seller.status=TDIf.get(statusId)
-//            seller.save()
+            def seller= Seller.get(sellerId)
+            def deptName=params.list('deptName').get(idx)
+            def statusId=params.list('statusId').get(idx)
+            seller.deptName=deptName
+            seller.status=TDIf.get(statusId)
+            seller.save()
             println "sellerIdsellerIdsellerId:::::::::::::::::"+sellerId
         }
         render ""+params
