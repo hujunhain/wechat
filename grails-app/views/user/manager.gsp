@@ -13,7 +13,7 @@
 <body>
 <div data-role="page" id="pageone">
     <div data-role="header">
-        <h1>注册验证</h1>
+        <h1>用户管理</h1>
     </div>
     <div data-role="content">
         <form method="get" id="form" commandName="customer"
