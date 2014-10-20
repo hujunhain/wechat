@@ -56,6 +56,10 @@ class UserController {
     def audit={
         println "audit:"+params
 
+        for (sellerId in params.list('sellerId')) {
+            println "sellerIdsellerIdsellerId:::::::::::::::::"+sellerId
+        }
+
     }
     def save( ) {
 
