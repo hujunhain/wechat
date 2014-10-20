@@ -81,6 +81,7 @@ class UserController {
         seller.mobile=phoneNum
         seller.status= TDIf.get(2) //否
         seller.wxUserId=userinfo.id
+        seller.name=realName
 
         if (!seller.hasErrors() && seller.save()) {
             println "seller save ok!"+seller.id
