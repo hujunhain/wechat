@@ -29,7 +29,7 @@ class UserController {
        def sellerList=Seller.findAllByWxUserIdIsNotNull( [max: 3, offset: offset, sort: "id", order: "desc"])
         println "sellerList:"+sellerList.size()
         def sellerCount=10
-        [sellerList:sellerList]
+        [sellerList:sellerList,sellerCount:sellerCount]
     }
     def sendCode={
         //render {abc:'123'} as JSON
