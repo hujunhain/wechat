@@ -6,6 +6,7 @@ import com.hhpc.wechat.domain.Seller
 import com.hhpc.wechat.domain.TDIf
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONElement
+import wechat.UserService
 
 
 class UserController {
@@ -22,13 +23,7 @@ class UserController {
 
         def code=params['code']
         response.setCharacterEncoding("UTF-8");
-        def url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=${weChatService.wxConfig.appId}&secret=${weChatService.wxConfig.secret}&code=${code}&grant_type=authorization_code"
-        println ""+url
-        def jsonStr ="{openid:def}"
-        if(code)jsonStr=weChatService.wxService.execute(new SimpleGetRequestExecutor(), url, null);
-        JSONElement jsonObject = JSON.parse(jsonStr)
-
-        def openid=jsonObject.get("openid")
+         def openid= userService.getOpenidByCode(code)
         def userinfo= WxUser.findByOpenid(openid)
 
        def sellerList=Seller.findAllByWxUserIdIsNotNull()
@@ -139,17 +134,8 @@ class UserController {
         println "A"
         println "A"
         println "A"
-        println "code:::::::"+code
-        def url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=${weChatService.wxConfig.appId}&secret=${weChatService.wxConfig.secret}&code=${code}&grant_type=authorization_code"
-        println ""+url
-        def jsonStr ="{openid:def}"
-        if(code)jsonStr=weChatService.wxService.execute(new SimpleGetRequestExecutor(), url, null);
-        JSONElement jsonObject = JSON.parse(jsonStr)
 
-
-        //  println "  access_token:"+jsonObject.getString("access_token")
-        //  println "  refresh_token:"+jsonObject.getString("refresh_token")
-        def openid
+        def openid= userService.getOpenidByCode(code)
         if(code)openid=jsonObject.get("openid")
         else openid='ok_busih96pQuC0C1iUuh2KC_iA0'
         def userinfo= WxUser.findByOpenid(openid)

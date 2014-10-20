@@ -1,17 +1,33 @@
 package wechat
 
 import chanjarster.weixin.bean.result.WxUser
+import chanjarster.weixin.util.http.SimpleGetRequestExecutor
 import com.hhpc.wechat.domain.Seller
+import grails.converters.JSON
 import grails.transaction.Transactional
+import org.codehaus.groovy.grails.web.json.JSONElement
 
 @Transactional
 class UserService {
+
+    def weChatService
 
     def serviceMethod() {
 
     }
 
+   def getOpenidByCode(def code){
 
+       def url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=${weChatService.wxConfig.appId}&secret=${weChatService.wxConfig.secret}&code=${code}&grant_type=authorization_code"
+       println ""+url
+       def jsonStr ="{openid:def}"
+       if(code)jsonStr=weChatService.wxService.execute(new SimpleGetRequestExecutor(), url, null);
+       JSONElement jsonObject = JSON.parse(jsonStr)
+
+       def openid=jsonObject.get("openid")
+
+       return openid
+   }
 
     def save(WxUser user) {
 
