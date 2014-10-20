@@ -20,13 +20,13 @@ class UserController {
 
     }
     def manager={
-
+        def offset=params.int("offset",0)
         def code=params['code']
         response.setCharacterEncoding("UTF-8");
          def openid= userService.getOpenidByCode(code)
         def userinfo= WxUser.findByOpenid(openid)
 
-       def sellerList=Seller.findAllByWxUserIdIsNotNull( [max: 3, offset: 2, sort: "id", order: "desc"])
+       def sellerList=Seller.findAllByWxUserIdIsNotNull( [max: 3, offset: offset, sort: "id", order: "desc"])
         println "sellerList:"+sellerList.size()
         [sellerList:sellerList]
     }
