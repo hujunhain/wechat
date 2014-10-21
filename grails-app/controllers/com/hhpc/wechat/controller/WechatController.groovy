@@ -149,7 +149,7 @@ class WechatController {
             StringBuffer sb = new StringBuffer();
 
             router
-                    .rule().async(false).rcontent("\\d\\d").handler(new WxMsgMessageHandler()).end()
+                    .rule().async(false).rContent("\\d\\d").handler(new WxMsgMessageHandler()).end()
                     .rule().async(false).event(WxConsts.EVT_SUBSCRIBE).handler(new WxSubMessageHandler()).end()
                     .rule().async(false).event(WxConsts.EVT_UNSUBSCRIBE).handler(new WxUnSubMessageHandler()).end()
                     .rule().async(false).handler(new WxEchoMessageHandler(sb, WxConsts.XML_MSG_TEXT)).end()
@@ -209,7 +209,7 @@ class WechatController {
 
             //获取 权限
 
-          def msgList=  MergerSms.findAll( [max: 10, offset: offset, sort: "id", order: "desc"])
+          def msgList=  MergerSms.findAll( [max: 10, offset: 0, sort: "id", order: "desc"])
            def msg=""
             msgList.each {
                 msg+= it.message+"\n"
