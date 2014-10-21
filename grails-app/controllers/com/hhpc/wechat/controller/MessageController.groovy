@@ -6,17 +6,20 @@ import com.hhpc.wechat.domain.MergerSms
 
 class MessageController {
     def parseSmsService
+    def userService
 
     def list={
-        def offset=params.int("offset",0)
         def code=params['code']
         response.setCharacterEncoding("UTF-8");
         def openid= userService.getOpenidByCode(code)
         def userinfo= WxUser.findByOpenid(openid)
 
+        def max=params.max?:10
+        def offset=params.offset?:0
+
         //获取 权限
 
-        def msgList=  MergerSms.list( [max: msgContent, offset: 0, sort: "id", order: "desc"])
+        def msgList=  MergerSms.list( [max: max, offset: offset, sort: "id", order: "desc"])
 
         [msgList:msgList]
     }
