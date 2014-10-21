@@ -110,8 +110,8 @@ class WechatController {
 
         WxMenu.WxMenuButton button32 = new WxMenu.WxMenuButton();
         button32.setType("view");
-        button32.setName("视频");
-        button32.setUrl("http://v.qq.com/");
+        button32.setName("消息");
+        button32.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${weChatService.wxConfig.appId}&redirect_uri=http://${weChatService.serverIp}/message/list&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
 
         WxMenu.WxMenuButton button33 = new WxMenu.WxMenuButton();
         button33.setType("click");
@@ -149,7 +149,7 @@ class WechatController {
             StringBuffer sb = new StringBuffer();
 
             router
-                    .rule().async(false).rContent("\\d\\d").handler(new WxMsgMessageHandler()).end()
+                    .rule().async(false).rContent("\\d{1,2}").handler(new WxMsgMessageHandler()).end()
                     .rule().async(false).event(WxConsts.EVT_SUBSCRIBE).handler(new WxSubMessageHandler()).end()
                     .rule().async(false).event(WxConsts.EVT_UNSUBSCRIBE).handler(new WxUnSubMessageHandler()).end()
                     .rule().async(false).handler(new WxEchoMessageHandler(sb, WxConsts.XML_MSG_TEXT)).end()
