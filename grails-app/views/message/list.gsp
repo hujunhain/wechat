@@ -19,20 +19,15 @@
               action="/user/audit" data-ajax=“false">
             <% msgList.each { msg -> %>
 
-            <div class="ui-grid-b">
 
                 <input type="hidden" id="sellerId" name="sellerId" value="${msg.id}" />
 
 
 
-                <div class="ui-block-c" style="width: 15%" >
-                    <div  style="top:0; left:0; width:100%; min-height:100%;  border:0;height:60px">
-                       ${msg.message}
+                    <p>    ${msg.message}</p>
 
-                    </div></div>
 
-            </div>
-            <%}%>
+             <%}%>
 
 
 
