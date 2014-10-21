@@ -216,7 +216,7 @@ class WechatController {
             }
 
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
-            m.setContent(userinfo.nickname+"欢迎关注华海鹏城");
+            m.setContent(msg);
             m.setCreateTime(1122l);
             m.setFromUserName(wxMessage.toUserName);
             m.setToUserName(wxMessage.fromUserName);
