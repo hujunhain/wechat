@@ -214,8 +214,8 @@ class WechatController {
                 def sms = "拨动祝福的琴弦，为您唱出最美妙的生日歌，点亮幸福的烛光，在您生日之际，（青岛啤酒）华海鹏城衷心的祝您生日快乐，身体健康！"
                 def smsId = smsService.send(sendNum, sms)
                 println "smsId    :"+smsId
-                def status=smsService.status(smsId)
-                msg=status+"("+sendNum+")"
+               // def status=smsService.status(smsId)
+                msg="短信已经发送"+"("+sendNum+")"
             }
 
 
