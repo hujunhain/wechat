@@ -25,8 +25,8 @@ class UserController {
         response.setCharacterEncoding("UTF-8");
          def openid= userService.getOpenidByCode(code)
         def userinfo= WxUser.findByOpenid(openid)
-
-       def sellerList=Seller.findAllByWxUserIdIsNotNull( [max: 3, offset: offset, sort: "id", order: "desc"])
+      //findAllByWxUserIdIsNotNull
+       def sellerList=Seller.list( [max: 10, offset: offset, sort: "id", order: "desc"])
         println "sellerList:"+sellerList.size()
         def sellerCount=10
         [sellerList:sellerList,sellerCount:sellerCount]

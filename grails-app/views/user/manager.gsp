@@ -58,9 +58,9 @@
 
             <input type="submit" value="提交">
             </form>
-       AAAAA <g:paginate next="Forward" prev="Back"
-                    maxsteps="0" controller="book"
-                    action="list" total="${200}" />
+        <g:paginate next="下一页" prev="前一页"
+                    maxsteps="0"
+                    action="manager" total="${200}" />
         </div>
     </div>
 </body>
