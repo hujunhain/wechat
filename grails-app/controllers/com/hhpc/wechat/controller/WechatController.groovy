@@ -205,11 +205,12 @@ class WechatController {
         public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
 
             def openid= wxMessage.fromUserName
+            def msgContent=wxMessage.getContent().toInteger()
 
 
             //获取 权限
 
-          def msgList=  MergerSms.list( [max: 10, offset: 0, sort: "id", order: "desc"])
+          def msgList=  MergerSms.list( [max: msgContent, offset: 0, sort: "id", order: "desc"])
            def msg=""
             msgList.each {
                 msg+= it.message+"\n"
