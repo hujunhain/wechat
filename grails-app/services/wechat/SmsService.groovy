@@ -32,6 +32,8 @@ class SmsService {
     def status(def smsId){
 
        def url= "http://web.mobset.com/SDK/Sms_Status.asp?SmsID="+smsId
+
+        println "url:"+url
         HttpGet httpGet = new HttpGet(url)
         CloseableHttpResponse response = httpclient.execute(httpGet);
         String responseContent = Utf8ResponseHandler.INSTANCE.handleResponse(response);
