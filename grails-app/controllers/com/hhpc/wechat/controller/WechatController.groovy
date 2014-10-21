@@ -350,8 +350,9 @@ println "UU"
 
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
 
+            def msg=resultSms?"你发送的消息："+resultSms:""
 
-            m.setContent("你发送的消息："+resultSms);
+            m.setContent(msg);
             m.setCreateTime(1122l);
             m.setFromUserName(wxMessage.toUserName);
             m.setToUserName(wxMessage.fromUserName);
