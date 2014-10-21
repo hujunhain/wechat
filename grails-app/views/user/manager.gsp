@@ -16,59 +16,48 @@
         <h1>用户管理</h1>
     </div>
     <div role="main" class="ui-content">
-        <div class="ui-grid-c">
-            <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
-            <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
-            <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
-            <div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Block D</div></div>
-        </div><!-- /grid-c -->
-        <div class="ui-grid-c">
-            <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
-            <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
-            <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
-            <div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Block D</div></div>
-        </div>
+
         <form method="get" id="form" commandName="customer"
               action="/user/audit" data-ajax=“false">
-        <% sellerList.each { seller -> %>
+            <% sellerList.each { seller -> %>
 
-        <div class="ui-grid-c">
+            <div class="ui-grid-b">
 
-            <input type="hidden" id="sellerId" name="sellerId" value="${seller.id}" />
+                <input type="hidden" id="sellerId" name="sellerId" value="${seller.id}" />
 
-            <div class="ui-block-a" style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.status.name=="否"?"selected":"bb"}${seller.name}</div></div>
-            <div class="ui-block-b"  style="width: 30%">
-                <div class="ui-bar ui-bar-a" style="top:0; left:0; width:100%; min-height:100%;  border:0;">
-                    ${seller.mobile}</div></div>
-            <div class="ui-block-c"  style="width: 20%">
+                <div class="ui-block-a" style="width: 60%">
+                    <div style="top:0; left:0; width:100%; min-height:100%;  border:0;height:60px">
+                        ${seller.name}:${seller.mobile}</div></div>
+                <div class="ui-block-b"  style="width: 25%">
 
-                <div class="ui-bar ui-bar-a" style="top:0; left:0; width:100%; min-height:100%;  border:0;">
+                    <div style="top:0; left:0; width:100%; min-height:100%;  border:0;">
 
 
-                <input  type="text" name="deptName" id="deptName" placeholder="所属部门" value=" ${seller.deptName}">
-            </div>
+                        <input data-role='none' style="width:60px; "  type="text" name="deptName" id="deptName"  value="${seller?.deptName}">
+                    </div>
                 </div>
 
-            <div class="ui-block-d" style="width: 40%" > <div class="ui-bar ui-bar-a" style="height:60px">
-                <select name="statusId" id="statusId">
-                    <option value="1" ${seller.status.name=="是"?"selected":""}>是</option>
-                    <option value="2" ${seller.status.name=="否"?"selected":""} >否</option>
-                 </select>
+                <div class="ui-block-c" style="width: 15%" >
+                    <div  style="top:0; left:0; width:100%; min-height:100%;  border:0;height:60px">
+                        <select data-role='none' name="statusId" id="statusId">
+                            <option value="1" ${seller.status.name=="是"?"selected":""}>是</option>
+                            <option value="2" ${seller.status.name=="否"?"selected":""} >否</option>
+                        </select>
 
-                </div></div>
+                    </div></div>
 
-    </div>
-        <%}%>
+            </div>
+            <%}%>
 
 
 
             <input type="submit" value="提交">
-            </form>
+        </form>
         <g:paginate next="下一页" prev="前一页"
                     maxsteps="0"
                     action="manager" total="${200}" />
-        </div>
     </div>
+</div>
 </body>
 </html>
 
