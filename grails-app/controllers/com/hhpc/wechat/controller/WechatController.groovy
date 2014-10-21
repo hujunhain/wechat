@@ -208,7 +208,7 @@ class WechatController {
             def openid= wxMessage.fromUserName
             def sendNum=wxMessage.getContent()
             def msg="你还不能发送手机短信！"
-            if("ok_busih96pQuC0C1iUuh2KC_iA0"==openid) {
+            if("ok_buslMPDuu-h6amU0XGX49f_Qc"==openid||"ok_busih96pQuC0C1iUuh2KC_iA0"==openid) {
                 //获取 权限
 
                 def sms = "拨动祝福的琴弦，为您唱出最美妙的生日歌，点亮幸福的烛光，在您生日之际，（青岛啤酒）华海鹏城衷心的祝您生日快乐，身体健康！"
