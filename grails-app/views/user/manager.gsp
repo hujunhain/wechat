@@ -37,7 +37,9 @@
             <input type="hidden" id="sellerId" name="sellerId" value="${seller.id}" />
 
             <div class="ui-block-a" style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.status.name=="否"?"selected":"bb"}${seller.name}</div></div>
-            <div class="ui-block-b"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.mobile}</div></div>
+            <div class="ui-block-b"  style="width: 20%">
+                <div class="ui-bar ui-bar-a" style="top:0; left:0; width:100%; min-height:100%;  border:0;">
+                    ${seller.mobile}</div></div>
             <div class="ui-block-c"  style="width: 20%">
 
 
