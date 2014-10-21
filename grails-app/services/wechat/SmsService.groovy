@@ -35,14 +35,14 @@ class SmsService {
         HttpGet httpGet = new HttpGet(url)
         CloseableHttpResponse response = httpclient.execute(httpGet);
         String responseContent = Utf8ResponseHandler.INSTANCE.handleResponse(response);
-
-        def statusId=responseContent.toInteger()
-
-        if(statusId==0){
-            "手机短信发送失败！"
-        }else{
-            "手机短信发送成功！"+statusId
-        }
+        return responseContent
+//        def statusId=responseContent.toInteger()
+//
+//        if(statusId==0){
+//            "手机短信发送失败！"
+//        }else{
+//            "手机短信发送成功！"+statusId
+//        }
 
     }
 
