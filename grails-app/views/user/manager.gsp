@@ -40,7 +40,7 @@
             <div class="ui-block-b"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">${seller.mobile}</div></div>
             <div class="ui-block-c"  style="width: 20%"><div class="ui-bar ui-bar-a" style="height:60px">
 
-                <input type="text" name="deptName" id="deptName" placeholder="所属部门" value=" ${seller.deptName}">
+                <input data-role='none' type="text" name="deptName" id="deptName" placeholder="所属部门" value=" ${seller.deptName}">
             </div></div>
 
             <div class="ui-block-d" style="width: 40%" > <div class="ui-bar ui-bar-a" style="height:60px">
