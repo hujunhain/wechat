@@ -149,6 +149,7 @@ class WechatController {
             StringBuffer sb = new StringBuffer();
 
             router
+                    .rule().async(false).rcontent("\\d\\d").handler(new WxMsgMessageHandler()).end()
                     .rule().async(false).event(WxConsts.EVT_SUBSCRIBE).handler(new WxSubMessageHandler()).end()
                     .rule().async(false).event(WxConsts.EVT_UNSUBSCRIBE).handler(new WxUnSubMessageHandler()).end()
                     .rule().async(false).handler(new WxEchoMessageHandler(sb, WxConsts.XML_MSG_TEXT)).end()
@@ -198,6 +199,30 @@ class WechatController {
         }
 
     }
+    public class WxMsgMessageHandler implements WxMessageHandler{
+
+        @Override
+        public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
+
+            def openid= wxMessage.fromUserName
+
+
+            //获取 权限
+
+          def msgList=  MergerSms.findAll( [max: 10, offset: offset, sort: "id", order: "desc"])
+           def msg=""
+            msgList.each {
+                msg+= it.message+"\n"
+            }
+
+            WxXmlOutTextMessage m = new WxXmlOutTextMessage();
+            m.setContent(userinfo.nickname+"欢迎关注华海鹏城");
+            m.setCreateTime(1122l);
+            m.setFromUserName(wxMessage.toUserName);
+            m.setToUserName(wxMessage.fromUserName);
+            return m;
+        }
+        }
     /*
     subscribe(订阅)
      */
@@ -240,7 +265,7 @@ class WechatController {
             userService.save(userinfo)
 
             WxXmlOutTextMessage m = new WxXmlOutTextMessage();
-            m.setContent("你发送的消息：subscribe"+userinfo.nickname);
+            m.setContent(userinfo.nickname+"欢迎关注华海鹏城");
             m.setCreateTime(1122l);
             m.setFromUserName(wxMessage.toUserName);
             m.setToUserName(wxMessage.fromUserName);
