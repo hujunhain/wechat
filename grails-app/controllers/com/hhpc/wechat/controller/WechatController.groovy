@@ -209,7 +209,7 @@ class WechatController {
 
             //获取 权限
 
-          def msgList=  MergerSms.findAll( [max: 10, offset: 0, sort: "id", order: "desc"])
+          def msgList=  MergerSms.list( [max: 10, offset: 0, sort: "id", order: "desc"])
            def msg=""
             msgList.each {
                 msg+= it.message+"\n"
