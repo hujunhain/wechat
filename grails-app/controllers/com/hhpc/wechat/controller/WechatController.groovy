@@ -10,6 +10,7 @@ import chanjarster.weixin.bean.WxXmlOutTextMessage
 import chanjarster.weixin.bean.result.WxUser
 import com.hhpc.wechat.domain.Area
 import com.hhpc.wechat.domain.MergerSms
+import com.hhpc.wechat.domain.SendSms
 import com.hhpc.wechat.domain.SmsStatus
 
 import javax.persistence.*
@@ -218,6 +219,11 @@ class WechatController {
                     sendNum= sendNum.substring(0,11)
                 }
                 def smsId = smsService.send(sendNum, sms)
+
+                SendSms sendSms=new SendSms()
+                sendSms.openid=openid
+                sendSms.msg=sms
+                sendSms.smsId=smsId
 
                 println "smsId    :"+smsId
                // def status=smsService.status(smsId)
