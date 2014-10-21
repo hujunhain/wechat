@@ -42,7 +42,7 @@
                     ${seller.mobile}</div></div>
             <div class="ui-block-c"  style="width: 20%">
 
-                <div  style="top:0; left:0; width:100%; min-height:100%;  border:0;">
+                <div class="ui-bar ui-bar-a" style="top:0; left:0; width:100%; min-height:100%;  border:0;">
 
 
                 <input  type="text" name="deptName" id="deptName" placeholder="所属部门" value=" ${seller.deptName}">
