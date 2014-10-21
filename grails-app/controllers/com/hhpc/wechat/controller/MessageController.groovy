@@ -8,6 +8,8 @@ class MessageController {
     def parseSmsService
     def userService
 
+
+
     def list={
         def code=params['code']
         response.setCharacterEncoding("UTF-8");

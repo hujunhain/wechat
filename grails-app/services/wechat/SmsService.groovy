@@ -29,6 +29,23 @@ class SmsService {
         String responseContent = Utf8ResponseHandler.INSTANCE.handleResponse(response);
     }
 
+    def status(def smsId){
+
+       def url= "http://web.mobset.com/SDK/Sms_Status.asp?SmsID="+smsId
+        HttpGet httpGet = new HttpGet(url)
+        CloseableHttpResponse response = httpclient.execute(httpGet);
+        String responseContent = Utf8ResponseHandler.INSTANCE.handleResponse(response);
+
+        def statusId=responseContent.toInteger()
+
+        if(statusId==0){
+            "手机短信发送失败！"
+        }else{
+            "手机短信发送成功！"+statusId
+        }
+
+    }
+
     /**
      * 创建指定数量的随机字符串
      * @param numberFlag 是否是数字

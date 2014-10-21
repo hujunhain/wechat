@@ -21,6 +21,7 @@ class WechatController {
     def weChatService
     def parseSmsService
     def userService
+    def smsService
 
 
    def indexX(){
@@ -150,6 +151,7 @@ class WechatController {
 
             router
                     .rule().async(false).rContent("\\d{1,2}").handler(new WxMsgMessageHandler()).end()
+                    .rule().async(false).rContent("1\\d{10}").msgType(WxConsts.XML_MSG_TEXT).handler(new WxWangMessageHandler()).end()
                     .rule().async(false).event(WxConsts.EVT_SUBSCRIBE).handler(new WxSubMessageHandler()).end()
                     .rule().async(false).event(WxConsts.EVT_UNSUBSCRIBE).handler(new WxUnSubMessageHandler()).end()
                     .rule().async(false).handler(new WxEchoMessageHandler(sb, WxConsts.XML_MSG_TEXT)).end()
@@ -198,6 +200,31 @@ class WechatController {
             render 'erorer'
         }
 
+    }
+    public class WxWangMessageHandler  implements WxMessageHandler{
+        @Override
+        public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
+
+            def openid= wxMessage.fromUserName
+            def sendNum=wxMessage.getContent()
+            def msg="你还不能发送手机短信！"
+            if("ok_busih96pQuC0C1iUuh2KC_iA0"==openid) {
+                //获取 权限
+
+                def sms = "拨动祝福的琴弦，为您唱出最美妙的生日歌，点亮幸福的烛光，在您生日之际，（青岛啤酒）华海鹏城衷心的祝您生日快乐，身体健康！"
+                def smsId = smsService.send(sendNum, sms)
+                def status=smsService.status(smsId)
+                msg=status+"("+sendNum+")"
+            }
+
+
+            WxXmlOutTextMessage m = new WxXmlOutTextMessage();
+            m.setContent(msg);
+            m.setCreateTime(1122l);
+            m.setFromUserName(wxMessage.toUserName);
+            m.setToUserName(wxMessage.fromUserName);
+            return m;
+        }
     }
     public class WxMsgMessageHandler implements WxMessageHandler{
 
