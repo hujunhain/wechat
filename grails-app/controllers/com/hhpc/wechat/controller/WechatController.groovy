@@ -225,6 +225,8 @@ class WechatController {
                 sendSms.msg=sms
                 sendSms.smsId=smsId
 
+                sendSms.save()
+
                 println "smsId    :"+smsId
                // def status=smsService.status(smsId)
                 msg="短信已经发送"+"("+sendNum+")"
