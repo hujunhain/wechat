@@ -48,11 +48,11 @@ class WechatController {
                 println " before group "+"idx :"+i+" name:"+wxGroup.name
        }
        def groupName=params.name
-       def oldName=params.old
+       def id=params.id
 
        if(groupName) {
 
-           if(!oldName) {
+           if(!id) {
                WxGroup res = weChatService.groupCreate(groupName);
            }
            groupList = weChatService.groupGet();
@@ -60,7 +60,7 @@ class WechatController {
 
            groupList.eachWithIndex { WxGroup wxGroup, int i ->
 
-               if(wxGroup.name.equals(oldName)) {
+               if(id==wxGroup.id) {
                    wxGroup.name=groupName
                    weChatService.groupUpdate(wxGroup)
 
