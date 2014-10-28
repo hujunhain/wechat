@@ -55,7 +55,9 @@ class WechatController {
 
            groupList.eachWithIndex { WxGroup wxGroup, int i ->
 
-               println " @@after group " + "idx :" + i + " name:" + wxGroup.name
+               groupName+= "idx :" + i + " name:" + wxGroup.name
+
+
            }
        }
 
