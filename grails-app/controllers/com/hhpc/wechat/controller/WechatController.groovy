@@ -203,8 +203,11 @@ class WechatController {
 
     }
     public class WxWangMessageHandler  implements WxMessageHandler{
+
         @Override
         public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
+
+            println "进入短信发送适配器。。。。。。。"
 
             def openid= wxMessage.fromUserName
             def sendNum=wxMessage.getContent()
@@ -246,6 +249,8 @@ class WechatController {
         @Override
         public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
 
+            println "报数短信查询适配器。。。。。。。"
+
             def openid= wxMessage.fromUserName
             def msgContent=wxMessage.getContent().toInteger()
 
@@ -272,6 +277,8 @@ class WechatController {
     public  class WxSubMessageHandler implements WxMessageHandler {
         @Override
         public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
+
+            println "进入订阅微信适配器。。。。。。。"
 
             def fromUserName= wxMessage.fromUserName
             WxUser userinfo=WxUser.findByOpenidLike(fromUserName)
@@ -325,8 +332,7 @@ class WechatController {
             def fromUserName= wxMessage.fromUserName
 
          //   def userinfo=weChatService.userInfo(fromUserName,'zh')
-println "UU"
-println "UU"
+            println "进入取消订阅适配器。。。。。。。"
 
 
             WxUser userinfo=WxUser.findByOpenidLike(fromUserName)
@@ -364,15 +370,20 @@ println "UU"
 
         @Override
         public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
+
+            println "进入消息接收显示适配器。。。。。。。"
+
             sb.append(this.echoStr).append(',').append("count:"+wxMessage.getContent()+" touser:"+wxMessage.getToUserName());
 
             println "XXXXXXXXX"
 
             wxMessage.save();
 
-           def resultSms
-
             def msgContent=wxMessage.getContent()
+
+            def resultSms=msgContent
+
+
             if(msgContent)msgContent=msgContent.replaceAll('，',',').replaceAll('＃','#').replaceAll('﹟','#').replaceAll('【','[').replaceAll('】',']').replace('［','[').replace('］',']').replace('「','[').replace('」',']').replaceAll('　', "").replaceAll("／","/").replaceAll(/\s/,"").replaceAll("\\(\\d/\\d\\)","").replaceAll('（','(').replaceAll('）',')').replaceAll(' ','').toUpperCase()
 
   println "msgContent:"+msgContent
