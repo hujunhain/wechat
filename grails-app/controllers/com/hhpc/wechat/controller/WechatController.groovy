@@ -60,7 +60,7 @@ class WechatController {
 
            groupList.eachWithIndex { WxGroup wxGroup, int i ->
 
-               if(oldName==wxGroup.name) {
+               if(wxGroup.name.equals(oldName)) {
                    wxGroup.name=groupName
                    weChatService.groupUpdate(wxGroup)
 
