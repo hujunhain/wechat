@@ -47,15 +47,19 @@ class WechatController {
 
                 println " before group "+"idx :"+i+" name:"+wxGroup.name
        }
+       def groupName=params.name
+       if(groupName) {
+           WxGroup res = weChatService.groupCreate("成都A");
 
-       WxGroup res = weChatService.groupCreate("测试分组1");
+           groupList = weChatService.groupGet();
 
-       groupList = weChatService.groupGet();
+           groupList.eachWithIndex { WxGroup wxGroup, int i ->
 
-       groupList.eachWithIndex { WxGroup wxGroup, int i ->
-
-           println " @@after group "+"idx :"+i+" name:"+wxGroup.name
+               println " @@after group " + "idx :" + i + " name:" + wxGroup.name
+           }
        }
+
+       render( "分组总数："+groupList.size()+"new group name:"+groupName)
    }
 
     String menus() {
