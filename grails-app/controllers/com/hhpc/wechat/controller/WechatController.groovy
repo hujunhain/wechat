@@ -49,7 +49,7 @@ class WechatController {
        }
        def groupName=params.name
        if(groupName) {
-           WxGroup res = weChatService.groupCreate("成都A");
+           WxGroup res = weChatService.groupCreate(groupName);
 
            groupList = weChatService.groupGet();
 
