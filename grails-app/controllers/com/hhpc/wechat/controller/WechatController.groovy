@@ -3,6 +3,7 @@ package com.hhpc.wechat.controller
 import chanjarster.weixin.api.WxConsts
 import chanjarster.weixin.api.WxMessageHandler
 import chanjarster.weixin.api.WxMessageRouter
+import chanjarster.weixin.bean.WxGroup
 import chanjarster.weixin.bean.WxMenu
 import chanjarster.weixin.bean.WxXmlMessage
 import chanjarster.weixin.bean.WxXmlOutMessage
@@ -38,7 +39,24 @@ class WechatController {
    }
 
 
+   def groups={
 
+       List<WxGroup> groupList = weChatService.groupGet();
+
+       groupList.eachWithIndex { WxGroup wxGroup, int i ->
+
+                println " before group "+"idx :"+i+" name:"+wxGroup.name
+       }
+
+       WxGroup res = weChatService.groupCreate("测试分组1");
+
+       groupList = weChatService.groupGet();
+
+       groupList.eachWithIndex { WxGroup wxGroup, int i ->
+
+           println " @@after group "+"idx :"+i+" name:"+wxGroup.name
+       }
+   }
 
     String menus() {
         weChatService.menuDelete();
