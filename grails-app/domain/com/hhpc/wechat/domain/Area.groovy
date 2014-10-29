@@ -17,11 +17,11 @@ class Area {
     User actUser;//财务部审核员
 
     static mapping = {
-        // table 'AREA_TABLE'
-        table 'z_hc_zone'
-       // name column: 'area_Name'
-       // id column: 'area_id'
-       // smsCode column: 'sms_Code'
+         table 'AREA_TABLE'
+       // table 'z_hc_zone'
+        name column: 'area_Name'
+        id column: 'area_id'
+        smsCode column: 'sms_Code'
 
         sort "seqNum"
     }
