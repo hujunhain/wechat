@@ -14,6 +14,11 @@ class SubArea {
 
     static def belongsTo = [area: Area]//属于一个区域
 
+    static mapping = {
+        table 'z_hc_area'
+       
+    }
+
 
     static constraints = {
         code(nullable: true)
