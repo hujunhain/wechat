@@ -133,6 +133,7 @@ public class WxMpXmlMessage {
     private Double longitude;
 
     @XmlElement(name = "Precision")
+    @Column(name = "Precis")
     private Double precision;
 
     @XmlElement(name = "Recognition")
