@@ -157,7 +157,7 @@ class UserController {
        // else openid='ok_busih96pQuC0C1iUuh2KC_iA0'
         def userinfo= WxMpUser.findByOpenId(openid)
 
-        def seller=Seller.findByWxMpUserId(userinfo.id)
+        def seller=Seller.findByWxUserId(userinfo.id)
         if(seller.status.name=="是"){
 
             render "你的微信号和手机号已经绑定且有效，不用再绑定注册了！！！"
