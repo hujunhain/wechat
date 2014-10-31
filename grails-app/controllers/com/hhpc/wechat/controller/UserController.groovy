@@ -155,7 +155,7 @@ class UserController {
 
         def openid= userService.getOpenidByCode(code)
        // else openid='ok_busih96pQuC0C1iUuh2KC_iA0'
-        def userinfo= WxMpUser.findByOpenid(openid)
+        def userinfo= WxMpUser.findByOpenId(openid)
 
         def seller=Seller.findByWxMpUserId(userinfo.id)
         if(seller.status.name=="是"){
