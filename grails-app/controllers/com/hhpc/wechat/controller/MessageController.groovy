@@ -15,7 +15,7 @@ class MessageController {
         def code=params['code']
         response.setCharacterEncoding("UTF-8");
         def openid= userService.getOpenidByCode(code)
-        def userinfo= WxMpUser.findByOpenid(openid)
+        def userinfo= WxMpUser.findByOpenId(openid)
 
         def max=params.max?:10
         def offset=params.offset?:0
