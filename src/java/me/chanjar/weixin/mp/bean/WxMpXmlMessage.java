@@ -12,8 +12,6 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <pre>
@@ -483,187 +481,33 @@ public class WxMpXmlMessage {
     this.errorCount = errorCount;
   }
 
-  public WxMpXmlMessage.ScanCodeInfo getScanCodeInfo() {
+  public ScanCodeInfo getScanCodeInfo() {
     return scanCodeInfo;
   }
 
-  public void setScanCodeInfo(WxMpXmlMessage.ScanCodeInfo scanCodeInfo) {
+  public void setScanCodeInfo(ScanCodeInfo scanCodeInfo) {
     this.scanCodeInfo = scanCodeInfo;
   }
 
-  public WxMpXmlMessage.SendPicsInfo getSendPicsInfo() {
+  public SendPicsInfo getSendPicsInfo() {
     return sendPicsInfo;
   }
 
-  public void setSendPicsInfo(WxMpXmlMessage.SendPicsInfo sendPicsInfo) {
+  public void setSendPicsInfo(SendPicsInfo sendPicsInfo) {
     this.sendPicsInfo = sendPicsInfo;
   }
 
-  public WxMpXmlMessage.SendLocationInfo getSendLocationInfo() {
+  public SendLocationInfo getSendLocationInfo() {
     return sendLocationInfo;
   }
 
-  public void setSendLocationInfo(WxMpXmlMessage.SendLocationInfo sendLocationInfo) {
+  public void setSendLocationInfo(SendLocationInfo sendLocationInfo) {
     this.sendLocationInfo = sendLocationInfo;
   }
 
-  @XmlRootElement(name = "ScanCodeInfo")
-  @XmlAccessorType(XmlAccessType.FIELD)
-  @Entity
-  @Table(name="Wx_Scan_Code_Info")
-  public static class ScanCodeInfo {
 
-      @Id
-      @GeneratedValue
-      Long id;
 
-      public Long getId() {
-          return id;
-      }
-      public void setId(Long id) {
-          this.id = id;
-      }
 
-    @XmlElement(name = "ScanType")
-    @XmlJavaTypeAdapter(AdapterCDATA.class)
-    private String scanType;
 
-    @XmlElement(name = "ScanResult")
-    @XmlJavaTypeAdapter(AdapterCDATA.class)
-    private String scanResult;
-
-    /**
-     * 扫描类型，一般是qrcode
-     * @return
-     */
-    public String getScanType() {
-
-      return scanType;
-    }
-
-    public void setScanType(String scanType) {
-      this.scanType = scanType;
-    }
-
-    /**
-     * 扫描结果，即二维码对应的字符串信息
-     * @return
-     */
-    public String getScanResult() {
-      return scanResult;
-    }
-
-    public void setScanResult(String scanResult) {
-      this.scanResult = scanResult;
-    }
-
-  }
-
-  @XmlRootElement(name = "SendPicsInfo")
-  @XmlAccessorType(XmlAccessType.FIELD)
-  public static class SendPicsInfo {
-
-    @XmlElement(name = "Count")
-    private Long count;
-
-    @XmlElementWrapper(name="PicList")
-    @XmlElement(name = "item")
-    protected final List<Item> picList = new ArrayList<Item>();
-
-    public Long getCount() {
-      return count;
-    }
-
-    public void setCount(Long count) {
-      this.count = count;
-    }
-
-    public List<Item> getPicList() {
-      return picList;
-    }
-
-    @XmlRootElement(name = "item")
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "WxXmlMessage.SendPicsInfo.Item")
-    public static class Item {
-
-      @XmlElement(name = "PicMd5Sum")
-      @XmlJavaTypeAdapter(AdapterCDATA.class)
-      private String PicMd5Sum;
-
-      public String getPicMd5Sum() {
-        return PicMd5Sum;
-      }
-
-      public void setPicMd5Sum(String picMd5Sum) {
-        PicMd5Sum = picMd5Sum;
-      }
-    }
-  }
-
-  @XmlRootElement(name = "SendLocationInfo")
-  @XmlAccessorType(XmlAccessType.FIELD)
-  public static class SendLocationInfo {
-
-    @XmlElement(name = "Location_X")
-    @XmlJavaTypeAdapter(AdapterCDATA.class)
-    private String locationX;
-
-    @XmlElement(name = "Location_Y")
-    @XmlJavaTypeAdapter(AdapterCDATA.class)
-    private String locationY;
-
-    @XmlElement(name = "Scale")
-    @XmlJavaTypeAdapter(AdapterCDATA.class)
-    private String scale;
-
-    @XmlElement(name = "Label")
-    @XmlJavaTypeAdapter(AdapterCDATA.class)
-    private String label;
-
-    @XmlElement(name = "Poiname")
-    @XmlJavaTypeAdapter(AdapterCDATA.class)
-    private String poiname;
-
-    public String getLocationX() {
-      return locationX;
-    }
-
-    public void setLocationX(String locationX) {
-      this.locationX = locationX;
-    }
-
-    public String getLocationY() {
-      return locationY;
-    }
-
-    public void setLocationY(String locationY) {
-      this.locationY = locationY;
-    }
-
-    public String getScale() {
-      return scale;
-    }
-
-    public void setScale(String scale) {
-      this.scale = scale;
-    }
-
-    public String getLabel() {
-      return label;
-    }
-
-    public void setLabel(String label) {
-      this.label = label;
-    }
-
-    public String getPoiname() {
-      return poiname;
-    }
-
-    public void setPoiname(String poiname) {
-      this.poiname = poiname;
-    }
-  }
 
 }

@@ -4,6 +4,8 @@
     <session-factory>
         <mapping package="me.chanjar.weixin.mp.bean" />
         <mapping class="me.chanjar.weixin.mp.bean.WxMpXmlMessage" />
+        <mapping class="me.chanjar.weixin.mp.bean.WxMpXmlMessage.ScanCodeInfo" />
+        <mapping class="me.chanjar.weixin.mp.bean.WxMpXmlMessage.ScanCodeInfo" />
         <mapping class="me.chanjar.weixin.mp.bean.result.WxMpUser" />
     </session-factory>
 </hibernate-configuration>
