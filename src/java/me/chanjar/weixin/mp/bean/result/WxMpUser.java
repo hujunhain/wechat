@@ -23,16 +23,16 @@ import java.util.Date;
 public class WxMpUser {
 
   protected boolean subscribe;
-  protected String openId;
+  protected String openid;
   protected String nickname;
   protected String sex;
   protected String language;
   protected String city;
   protected String province;
   protected String country;
-  protected String headImgUrl;
+  protected String headimgurl;
   protected long subscribeTime;
-  protected String unionId;
+  protected String unionid;
 
     /*******************/
     public String realName;//真实姓名
