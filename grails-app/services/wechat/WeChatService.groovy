@@ -1,34 +1,51 @@
 package wechat
 
-import chanjarster.weixin.api.WxConfigStorage
-import chanjarster.weixin.api.WxInMemoryConfigStorage
-import chanjarster.weixin.api.WxService
-import chanjarster.weixin.api.WxServiceImpl
-import chanjarster.weixin.bean.WxCustomMessage
-import chanjarster.weixin.bean.WxGroup
-import chanjarster.weixin.bean.WxMassGroupMessage
-import chanjarster.weixin.bean.WxMassNews
-import chanjarster.weixin.bean.WxMassOpenIdsMessage
-import chanjarster.weixin.bean.WxMassVideo
-import chanjarster.weixin.bean.WxMenu
-import chanjarster.weixin.bean.result.WxMassSendResult
-import chanjarster.weixin.bean.result.WxMassUploadResult
-import chanjarster.weixin.bean.result.WxMediaUploadResult
-import chanjarster.weixin.bean.result.WxQrCodeTicket
-import chanjarster.weixin.bean.result.WxUser
-import chanjarster.weixin.bean.result.WxUserList
-import chanjarster.weixin.exception.WxErrorException
+//import chanjarster.weixin.api.WxConfigStorage
+//import chanjarster.weixin.api.WxInMemoryConfigStorage
+//import chanjarster.weixin.api.WxService
+//import chanjarster.weixin.api.WxServiceImpl
+//import chanjarster.weixin.bean.WxCustomMessage
+//import chanjarster.weixin.bean.WxGroup
+//import chanjarster.weixin.bean.WxMassGroupMessage
+//import chanjarster.weixin.bean.WxMassNews
+//import chanjarster.weixin.bean.WxMassOpenIdsMessage
+//import chanjarster.weixin.bean.WxMassVideo
+//import chanjarster.weixin.bean.WxMenu
+//import chanjarster.weixin.bean.result.WxMassSendResult
+//import chanjarster.weixin.bean.result.WxMassUploadResult
+//import chanjarster.weixin.bean.result.WxMediaUploadResult
+//import chanjarster.weixin.bean.result.WxQrCodeTicket
+//import chanjarster.weixin.bean.result.WxUser
+//import chanjarster.weixin.bean.result.WxUserList
+//import chanjarster.weixin.exception.WxErrorException
 import grails.transaction.Transactional
-
+import me.chanjar.weixin.common.bean.WxMenu
+import me.chanjar.weixin.common.bean.result.WxMediaUploadResult
+import me.chanjar.weixin.common.exception.WxErrorException
+import me.chanjar.weixin.mp.api.WxMpConfigStorage
+import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage
+import me.chanjar.weixin.mp.api.WxMpService
+import me.chanjar.weixin.mp.api.WxMpServiceImpl
+import me.chanjar.weixin.mp.bean.WxMpCustomMessage
+import me.chanjar.weixin.mp.bean.WxMpGroup
+import me.chanjar.weixin.mp.bean.WxMpMassGroupMessage
+import me.chanjar.weixin.mp.bean.WxMpMassNews
+import me.chanjar.weixin.mp.bean.WxMpMassOpenIdsMessage
+import me.chanjar.weixin.mp.bean.WxMpMassVideo
+import me.chanjar.weixin.mp.bean.result.WxMpMassSendResult
+import me.chanjar.weixin.mp.bean.result.WxMpMassUploadResult
+import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket
+import me.chanjar.weixin.mp.bean.result.WxMpUser
+import me.chanjar.weixin.mp.bean.result.WxMpUserList
 
 
 @Transactional
-class WeChatService implements WxService {
+class WeChatService implements WxMpService {
 
     def grailsApplication
 
-     final WxServiceImpl wxService
-     final   WxInMemoryConfigStorage wxConfig
+     final WxMpServiceImpl  wxService
+     final   WxMpInMemoryConfigStorage wxConfig
     def serverIp
 
 
@@ -44,13 +61,13 @@ class WeChatService implements WxService {
         def token=grailsApplication.config.wechat.token //BuildConfig.groovy
           serverIp=grailsApplication.config.wechat.server.ip //Config.groovy
 
-        this.wxService = new WxServiceImpl();
-        this.wxConfig = new WxInMemoryConfigStorage();
+        this.wxService = new WxMpServiceImpl();
+        this.wxConfig = new WxMpInMemoryConfigStorage();
 
         wxConfig.setAppId(appid); // 设置微信公众号的appid
         wxConfig.setSecret(appSecret); // 设置微信公众号的app secret
         wxConfig.setToken(token); // 设置微信公众号的token
-        wxService.setWxConfigStorage(wxConfig);
+        wxService.setWxMpConfigStorage(wxConfig);
         println ""
         println ""
         println "WeChatService 配置成功"
@@ -87,27 +104,27 @@ class WeChatService implements WxService {
     }
 
     @Override
-    void customMessageSend(WxCustomMessage message) throws WxErrorException {
+    void customMessageSend(WxMpCustomMessage message) throws WxErrorException {
         wxService.customMessageSend( message)
     }
 
     @Override
-    WxMassUploadResult massNewsUpload(WxMassNews news) throws WxErrorException {
+    WxMpMassUploadResult massNewsUpload(WxMpMassNews news) throws WxErrorException {
         return wxService.massNewsUpload( news)
     }
 
     @Override
-    WxMassUploadResult massVideoUpload(WxMassVideo video) throws WxErrorException {
+    WxMpMassUploadResult massVideoUpload(WxMpMassVideo video) throws WxErrorException {
         return wxService.massVideoUpload( video)
     }
 
     @Override
-    WxMassSendResult massGroupMessageSend(WxMassGroupMessage message) throws WxErrorException {
+    WxMpMassSendResult massGroupMessageSend(WxMpMassGroupMessage message) throws WxErrorException {
         return wxService.massGroupMessageSend( message)
     }
 
     @Override
-    WxMassSendResult massOpenIdsMessageSend(WxMassOpenIdsMessage message) throws WxErrorException {
+    WxMpMassSendResult massOpenIdsMessageSend(WxMpMassOpenIdsMessage message) throws WxErrorException {
         return wxService. massOpenIdsMessageSend( message)
     }
 
@@ -127,12 +144,12 @@ class WeChatService implements WxService {
     }
 
     @Override
-    WxGroup groupCreate(String name) throws WxErrorException {
+    WxMpGroup groupCreate(String name) throws WxErrorException {
         return wxService.groupCreate( name)
     }
 
     @Override
-    List<WxGroup> groupGet() throws WxErrorException {
+    List<WxMpGroup> groupGet() throws WxErrorException {
         return wxService.groupGet()
     }
 
@@ -142,7 +159,7 @@ class WeChatService implements WxService {
     }
 
     @Override
-    void groupUpdate(WxGroup group) throws WxErrorException {
+    void groupUpdate(WxMpGroup group) throws WxErrorException {
         wxService.groupUpdate( group)
     }
 
@@ -157,27 +174,27 @@ class WeChatService implements WxService {
     }
 
     @Override
-    WxUser userInfo(String openid, String lang) throws WxErrorException {
+    WxMpUser userInfo(String openid, String lang) throws WxErrorException {
         return wxService.userInfo( openid,  lang)
     }
 
     @Override
-    WxUserList userList(String next_openid) throws WxErrorException {
+    WxMpUserList userList(String next_openid) throws WxErrorException {
         return wxService.userList( next_openid)
     }
 
     @Override
-    WxQrCodeTicket qrCodeCreateTmpTicket(int scene_id, Integer expire_seconds) throws WxErrorException {
+    WxMpQrCodeTicket qrCodeCreateTmpTicket(int scene_id, Integer expire_seconds) throws WxErrorException {
         return wxService. qrCodeCreateTmpTicket( scene_id,  expire_seconds)
     }
 
     @Override
-    WxQrCodeTicket qrCodeCreateLastTicket(int scene_id) throws WxErrorException {
+    WxMpQrCodeTicket qrCodeCreateLastTicket(int scene_id) throws WxErrorException {
         return wxService.qrCodeCreateLastTicket( scene_id)
     }
 
     @Override
-    File qrCodePicture(WxQrCodeTicket ticket) throws WxErrorException {
+    File qrCodePicture(WxMpQrCodeTicket ticket) throws WxErrorException {
         return wxService.qrCodePicture( ticket)
     }
 
@@ -187,8 +204,8 @@ class WeChatService implements WxService {
     }
 
     @Override
-    void setWxConfigStorage(WxConfigStorage wxConfigProvider) {
-        wxService.setWxConfigStorage( wxConfigProvider)
+    void setWxMpConfigStorage(WxMpConfigStorage wxConfigProvider) {
+        wxService.setWxMpConfigStorage( wxConfigProvider)
     }
 
 }

@@ -1,10 +1,11 @@
 package com.hhpc.wechat.controller
 
-import chanjarster.weixin.bean.result.WxUser
-import chanjarster.weixin.util.http.SimpleGetRequestExecutor
+//import chanjarster.weixin.bean.result.WxUser
+//import chanjarster.weixin.util.http.SimpleGetRequestExecutor
 import com.hhpc.wechat.domain.Seller
 import com.hhpc.wechat.domain.TDIf
 import grails.converters.JSON
+import me.chanjar.weixin.mp.bean.result.WxMpUser
 import org.codehaus.groovy.grails.web.json.JSONElement
 import wechat.UserService
 
@@ -24,7 +25,7 @@ class UserController {
         def code=params['code']
         response.setCharacterEncoding("UTF-8");
          def openid= userService.getOpenidByCode(code)
-        def userinfo= WxUser.findByOpenid(openid)
+        def userinfo= WxMpUser.findByOpenid(openid)
       //findAllByWxUserIdIsNotNull
        def sellerList=Seller.list( [max: 10, offset: offset, sort: "id", order: "desc"])
         println "sellerList:"+sellerList.size()
@@ -37,7 +38,7 @@ class UserController {
         println "^^^^^^sendCodesendCodesendCodesendCodesendCodesendCode&&^^^^^"
         println "params       :"+params
 
-       // def userinfo=  WxUser.get(7)
+       // def userinfo=  WxMpUser.get(7)
         def openid=params["openid"]
         def smsIdx=params.int('smsIdx')
         def phoneNum=params['phoneNum']
@@ -82,7 +83,7 @@ class UserController {
        def deptName=params['deptName']
 
         println "openid:"+openid+"phoneNum:"+phoneNum
-        def userinfo=  WxUser.findByOpenid(openid)
+        def userinfo=  WxMpUser.findByOpenid(openid)
         userinfo.realName=realName
         userinfo.phoneNum=phoneNum
         userinfo.regionDate=new Date();
@@ -125,7 +126,7 @@ class UserController {
     def show() {
         def id=params['id']
 
-        def userinfo=  WxUser.get(id)
+        def userinfo=  WxMpUser.get(id)
         userinfo.realName="A:"+userinfo.realName
       //  userService.save(userinfo)
 
@@ -154,9 +155,9 @@ class UserController {
 
         def openid= userService.getOpenidByCode(code)
        // else openid='ok_busih96pQuC0C1iUuh2KC_iA0'
-        def userinfo= WxUser.findByOpenid(openid)
+        def userinfo= WxMpUser.findByOpenid(openid)
 
-        def seller=Seller.findByWxUserId(userinfo.id)
+        def seller=Seller.findByWxMpUserId(userinfo.id)
         if(seller.status.name=="是"){
 
             render "你的微信号和手机号已经绑定且有效，不用再绑定注册了！！！"

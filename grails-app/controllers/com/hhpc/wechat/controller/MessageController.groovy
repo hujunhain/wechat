@@ -1,8 +1,9 @@
 package com.hhpc.wechat.controller
 
-import chanjarster.weixin.bean.WxXmlOutTextMessage
-import chanjarster.weixin.bean.result.WxUser
+//import chanjarster.weixin.bean.WxXmlOutTextMessage
+//import chanjarster.weixin.bean.result.WxUser
 import com.hhpc.wechat.domain.MergerSms
+import me.chanjar.weixin.mp.bean.result.WxMpUser
 
 class MessageController {
     def parseSmsService
@@ -14,7 +15,7 @@ class MessageController {
         def code=params['code']
         response.setCharacterEncoding("UTF-8");
         def openid= userService.getOpenidByCode(code)
-        def userinfo= WxUser.findByOpenid(openid)
+        def userinfo= WxMpUser.findByOpenid(openid)
 
         def max=params.max?:10
         def offset=params.offset?:0

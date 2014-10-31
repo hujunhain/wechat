@@ -1,10 +1,12 @@
 package wechat
 
-import chanjarster.weixin.bean.result.WxUser
-import chanjarster.weixin.util.http.SimpleGetRequestExecutor
+//import chanjarster.weixin.bean.result.WxUser
+//import chanjarster.weixin.util.http.SimpleGetRequestExecutor
 import com.hhpc.wechat.domain.Seller
 import grails.converters.JSON
 import grails.transaction.Transactional
+import me.chanjar.weixin.common.util.http.SimpleGetRequestExecutor
+import me.chanjar.weixin.mp.bean.result.WxMpUser
 import org.codehaus.groovy.grails.web.json.JSONElement
 
 @Transactional
@@ -29,7 +31,7 @@ class UserService {
        return openid
    }
 
-    def save(WxUser user) {
+    def save(WxMpUser user) {
 
 //        Account.withTransaction { status ->
 //                 def source = Account.get(params.from)

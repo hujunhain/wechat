@@ -1,7 +1,8 @@
 package wechat
 
-import chanjarster.weixin.util.http.Utf8ResponseHandler
+//import chanjarster.weixin.util.http.Utf8ResponseHandler
 import grails.transaction.Transactional
+import me.chanjar.weixin.common.util.http.Utf8ResponseHandler
 import org.apache.http.client.methods.CloseableHttpResponse
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.CloseableHttpClient

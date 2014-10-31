@@ -1,18 +1,27 @@
 package com.hhpc.wechat.controller
 
-import chanjarster.weixin.api.WxConsts
-import chanjarster.weixin.api.WxMessageHandler
-import chanjarster.weixin.api.WxMessageRouter
-import chanjarster.weixin.bean.WxGroup
-import chanjarster.weixin.bean.WxMenu
-import chanjarster.weixin.bean.WxXmlMessage
-import chanjarster.weixin.bean.WxXmlOutMessage
-import chanjarster.weixin.bean.WxXmlOutTextMessage
-import chanjarster.weixin.bean.result.WxUser
+//import chanjarster.weixin.api.WxConsts
+//import chanjarster.weixin.api.WxMessageHandler
+//import chanjarster.weixin.api.WxMessageRouter
+//import chanjarster.weixin.bean.WxGroup
+//import chanjarster.weixin.bean.WxMenu
+//import chanjarster.weixin.bean.WxXmlMessage
+//import chanjarster.weixin.bean.WxXmlOutMessage
+//import chanjarster.weixin.bean.WxXmlOutTextMessage
+//import chanjarster.weixin.bean.result.WxUser
 import com.hhpc.wechat.domain.Area
 import com.hhpc.wechat.domain.MergerSms
 import com.hhpc.wechat.domain.SendSms
 import com.hhpc.wechat.domain.SmsStatus
+import me.chanjar.weixin.common.api.WxConsts
+import me.chanjar.weixin.common.bean.WxMenu
+import me.chanjar.weixin.mp.api.WxMpMessageHandler
+import me.chanjar.weixin.mp.api.WxMpMessageRouter
+import me.chanjar.weixin.mp.bean.WxMpGroup
+import me.chanjar.weixin.mp.bean.WxMpXmlMessage
+import me.chanjar.weixin.mp.bean.WxMpXmlOutMessage
+import me.chanjar.weixin.mp.bean.WxMpXmlOutTextMessage
+import me.chanjar.weixin.mp.bean.result.WxMpUser
 
 import javax.persistence.*
 
@@ -28,10 +37,10 @@ class WechatController {
 
    def indexX(){
 
-       WxXmlMessage getmsg= WxXmlMessage.get(1)
+       WxMpXmlMessage getmsg= WxXmlMessage.get(1)
 
        println "*****%%#@@%%%%% msg:"+getmsg.id+" cont:"+getmsg.content
-       WxUser user=WxUser.get(1)
+       WxMpUser user=WxUser.get(1)
        println "userId:"+user.id+" user openid"+user.openid
        println "  "+WxUser.findByOpenid(user.openid)
 
@@ -41,9 +50,9 @@ class WechatController {
 
    def groups={
 
-       List<WxGroup> groupList = weChatService.groupGet();
+       List<WxMpGroup> groupList = weChatService.groupGet();
 
-       groupList.eachWithIndex { WxGroup wxGroup, int i ->
+       groupList.eachWithIndex { WxMpGroup wxGroup, int i ->
 
                 println " before group "+"idx :"+i+" name:"+wxGroup.name
        }
@@ -53,12 +62,12 @@ class WechatController {
        if(groupName) {
 
            if(id>0) {
-               WxGroup res = weChatService.groupCreate(groupName);
+               WxMpGroup res = weChatService.groupCreate(groupName);
            }
            groupList = weChatService.groupGet();
 
 
-           groupList.eachWithIndex { WxGroup wxGroup, int i ->
+           groupList.eachWithIndex { WxMpGroup wxGroup, int i ->
 
                if(id==wxGroup.id) {
                    wxGroup.name=groupName
@@ -94,9 +103,9 @@ class WechatController {
         WxMenu.WxMenuButton button3 = new WxMenu.WxMenuButton();
         button3.setName("促销");
 
-        menu.getButton().add(button1);
-        menu.getButton().add(button2);
-        menu.getButton().add(button3);
+        menu.getButtons().add(button1);
+        menu.getButtons().add(button2);
+        menu.getButtons().add(button3);
 
         WxMenu.WxMenuButton button11 = new WxMenu.WxMenuButton();
         button11.setType("pic_sysphoto");
@@ -114,9 +123,9 @@ class WechatController {
         button13.setName("微信相册发图");
         button13.setKey("rselfmenu_1_3");
 
-        button1.getSub_button().add(button11);
-        button1.getSub_button().add(button12);
-        button1.getSub_button().add(button13);
+        button1.getSubButtons().add(button11);
+        button1.getSubButtons().add(button12);
+        button1.getSubButtons().add(button13);
 
 
         WxMenu.WxMenuButton button21 = new WxMenu.WxMenuButton();
@@ -131,9 +140,9 @@ class WechatController {
 
 
 
-        button2.getSub_button().add(button21);
-        button2.getSub_button().add(button22);
-        button2.getSub_button().add(button13);
+        button2.getSubButtons().add(button21);
+        button2.getSubButtons().add(button22);
+        button2.getSubButtons().add(button13);
 
         WxMenu.WxMenuButton button30 = new WxMenu.WxMenuButton();
         button30.setType("view");
@@ -157,9 +166,9 @@ class WechatController {
         button33.setName("赞一下我们");
         button33.setKey("V1001_GOOD");
 
-        button3.getSub_button().add(button30);
-        button3.getSub_button().add(button31);
-        button3.getSub_button().add(button32);
+        button3.getSubButtons().add(button30);
+        button3.getSubButtons().add(button31);
+        button3.getSubButtons().add(button32);
         // button3.getSub_button().add(button33);
 
         weChatService.menuCreate(menu)
@@ -184,7 +193,7 @@ class WechatController {
             redirect(action: "valid", params: params)
         }
         else {
-            WxMessageRouter router = new WxMessageRouter();
+            WxMpMessageRouter router = new WxMpMessageRouter();
             StringBuffer sb = new StringBuffer();
 
             router
@@ -195,9 +204,9 @@ class WechatController {
                     .rule().async(false).handler(new WxEchoMessageHandler(sb, WxConsts.XML_MSG_TEXT)).end()
             //   router.rule().async(false).msgType(WxConsts.XML_MSG_TEXT).handler(handler(sb, WxConsts.XML_MSG_TEXT)).end()
 
-            WxXmlMessage message = WxXmlMessage.fromXml(groovy.xml.XmlUtil.serialize(request.XML));
+            WxMpXmlMessage message = WxXmlMessage.fromXml(groovy.xml.XmlUtil.serialize(request.XML));
             // WxXmlMessage message = WxXmlMessage.fromXml(request.getInputStream());
-            WxXmlOutMessage outmsg = router.route(message);
+            WxMpXmlOutMessage outmsg = router.route(message);
 
 
 
@@ -239,10 +248,10 @@ class WechatController {
         }
 
     }
-    public class WxWangMessageHandler  implements WxMessageHandler{
+    public class WxWangMessageHandler  implements WxMpMessageHandler{
 
         @Override
-        public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
+        public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context) {
 
             println "进入短信发送适配器。。。。。。。"
 
@@ -273,7 +282,7 @@ class WechatController {
             }
 
 
-            WxXmlOutTextMessage m = new WxXmlOutTextMessage();
+            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
             m.setContent(msg);
             m.setCreateTime(1122l);
             m.setFromUserName(wxMessage.toUserName);
@@ -281,10 +290,10 @@ class WechatController {
             return m;
         }
     }
-    public class WxMsgMessageHandler implements WxMessageHandler{
+    public class WxMsgMessageHandler implements WxMpMessageHandler{
 
         @Override
-        public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
+        public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context) {
 
             println "报数短信查询适配器。。。。。。。"
 
@@ -300,7 +309,7 @@ class WechatController {
                 msg+= it.message+"\n"
             }
 
-            WxXmlOutTextMessage m = new WxXmlOutTextMessage();
+            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
             m.setContent(msg);
             m.setCreateTime(1122l);
             m.setFromUserName(wxMessage.toUserName);
@@ -311,14 +320,14 @@ class WechatController {
     /*
     subscribe(订阅)
      */
-    public  class WxSubMessageHandler implements WxMessageHandler {
+    public  class WxSubMessageHandler implements WxMpMessageHandler {
         @Override
-        public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
+        public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context) {
 
             println "进入订阅微信适配器。。。。。。。"
 
             def fromUserName= wxMessage.fromUserName
-            WxUser userinfo=WxUser.findByOpenidLike(fromUserName)
+            WxMpUser userinfo=WxUser.findByOpenidLike(fromUserName)
 
 
                def wxuserinfo=weChatService.userInfo(fromUserName,'zh')
@@ -351,7 +360,7 @@ class WechatController {
 
             userService.save(userinfo)
 
-            WxXmlOutTextMessage m = new WxXmlOutTextMessage();
+            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
             m.setContent(userinfo.nickname+"欢迎关注华海鹏城");
             m.setCreateTime(1122l);
             m.setFromUserName(wxMessage.toUserName);
@@ -362,9 +371,9 @@ class WechatController {
     /*
   subscribe(取消订阅)
    */
-    public  class WxUnSubMessageHandler implements WxMessageHandler {
+    public  class WxUnSubMessageHandler implements WxMpMessageHandler {
         @Override
-        public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
+        public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context) {
 
             def fromUserName= wxMessage.fromUserName
 
@@ -372,7 +381,7 @@ class WechatController {
             println "进入取消订阅适配器。。。。。。。"
 
 
-            WxUser userinfo=WxUser.findByOpenidLike(fromUserName)
+            WxMpUser userinfo=WxUser.findByOpenidLike(fromUserName)
             println "UU"+userinfo.subscribe
             userinfo.setSubscribe(false)
             println("un sub%%******:::"+fromUserName+" id:"+userinfo.id)
@@ -387,7 +396,7 @@ class WechatController {
             }
 
             println "tt::::::::"+userinfo.subscribe
-            WxXmlOutTextMessage m = new WxXmlOutTextMessage();
+            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
             m.setContent("你发送的消息：subscribe"+userinfo.nickname);
             m.setCreateTime(1122l);
             m.setFromUserName(wxMessage.toUserName);
@@ -395,7 +404,7 @@ class WechatController {
             return m;
         }
     }
-    public  class WxEchoMessageHandler implements WxMessageHandler {
+    public  class WxEchoMessageHandler implements WxMpMessageHandler {
 
         private StringBuffer sb;
         private String echoStr;
@@ -406,7 +415,7 @@ class WechatController {
         }
 
         @Override
-        public WxXmlOutMessage handle(WxXmlMessage wxMessage, Map<String, Object> context) {
+        public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context) {
 
             println "进入消息接收显示适配器。。。。。。。"
 
@@ -464,7 +473,7 @@ class WechatController {
             }
 
 
-            WxXmlOutTextMessage m = new WxXmlOutTextMessage();
+            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
 
             def msg=resultSms?"你发送的消息："+resultSms:""
 
