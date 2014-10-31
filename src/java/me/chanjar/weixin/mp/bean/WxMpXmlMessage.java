@@ -509,7 +509,20 @@ public class WxMpXmlMessage {
 
   @XmlRootElement(name = "ScanCodeInfo")
   @XmlAccessorType(XmlAccessType.FIELD)
+  @Entity
+  @Table(name="Wx_Scan_Code_Info")
   public static class ScanCodeInfo {
+
+      @Id
+      @GeneratedValue
+      Long id;
+
+      public Long getId() {
+          return id;
+      }
+      public void setId(Long id) {
+          this.id = id;
+      }
 
     @XmlElement(name = "ScanType")
     @XmlJavaTypeAdapter(AdapterCDATA.class)
