@@ -25,7 +25,7 @@ class UserController {
         def code=params['code']
         response.setCharacterEncoding("UTF-8");
          def openid= userService.getOpenidByCode(code)
-        def userinfo= WxMpUser.findByOpenid(openid)
+        def userinfo= WxMpUser.findByOpenId(openid)
       //findAllByWxUserIdIsNotNull
        def sellerList=Seller.list( [max: 10, offset: offset, sort: "id", order: "desc"])
         println "sellerList:"+sellerList.size()
@@ -83,7 +83,7 @@ class UserController {
        def deptName=params['deptName']
 
         println "openid:"+openid+"phoneNum:"+phoneNum
-        def userinfo=  WxMpUser.findByOpenid(openid)
+        def userinfo=  WxMpUser.findByOpenId(openid)
         userinfo.realName=realName
         userinfo.phoneNum=phoneNum
         userinfo.regionDate=new Date();
