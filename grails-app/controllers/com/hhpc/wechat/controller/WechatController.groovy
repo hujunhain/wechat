@@ -37,7 +37,7 @@ class WechatController {
 
    def indexX(){
 
-       WxMpXmlMessage getmsg= WxXmlMessage.get(1)
+       WxMpXmlMessage getmsg= WxMpXmlMessage.get(1)
 
        println "*****%%#@@%%%%% msg:"+getmsg.id+" cont:"+getmsg.content
        WxMpUser user=WxUser.get(1)
@@ -204,7 +204,7 @@ class WechatController {
                     .rule().async(false).handler(new WxEchoMessageHandler(sb, WxConsts.XML_MSG_TEXT)).end()
             //   router.rule().async(false).msgType(WxConsts.XML_MSG_TEXT).handler(handler(sb, WxConsts.XML_MSG_TEXT)).end()
 
-            WxMpXmlMessage message = WxXmlMessage.fromXml(groovy.xml.XmlUtil.serialize(request.XML));
+            WxMpXmlMessage message = WxMpXmlMessage.fromXml(groovy.xml.XmlUtil.serialize(request.XML));
             // WxXmlMessage message = WxXmlMessage.fromXml(request.getInputStream());
             WxMpXmlOutMessage outmsg = router.route(message);
 
