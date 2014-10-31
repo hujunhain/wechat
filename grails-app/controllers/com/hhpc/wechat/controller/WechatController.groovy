@@ -40,9 +40,9 @@ class WechatController {
        WxMpXmlMessage getmsg= WxMpXmlMessage.get(1)
 
        println "*****%%#@@%%%%% msg:"+getmsg.id+" cont:"+getmsg.content
-       WxMpUser user=WxUser.get(1)
-       println "userId:"+user.id+" user openid"+user.openid
-       println "  "+WxUser.findByOpenid(user.openid)
+       WxMpUser user=WxMpUser.get(1)
+       println "userId:"+user.id+" user openid"+user.openId
+       println "  "+WxMpUser.findByOpenId(user.openId)
 
        render("abc"+getmsg)
    }
@@ -327,7 +327,7 @@ class WechatController {
             println "进入订阅微信适配器。。。。。。。"
 
             def fromUserName= wxMessage.fromUserName
-            WxMpUser userinfo=WxUser.findByOpenidLike(fromUserName)
+            WxMpUser userinfo=WxMpUser.findByOpenIdLike(fromUserName)
 
 
                def wxuserinfo=weChatService.userInfo(fromUserName,'zh')
@@ -337,7 +337,7 @@ class WechatController {
                 userinfo.subscribe=wxuserinfo.subscribe
                 userinfo.city=wxuserinfo.city
                 userinfo.province=wxuserinfo.province
-                userinfo.headimgurl=wxuserinfo.headimgurl
+                userinfo.headImgUrl=wxuserinfo.headImgUrl
                 userinfo.sex=wxuserinfo.sex
             }
             println "ss"
@@ -381,7 +381,7 @@ class WechatController {
             println "进入取消订阅适配器。。。。。。。"
 
 
-            WxMpUser userinfo=WxUser.findByOpenidLike(fromUserName)
+            WxMpUser userinfo=WxMpUser.findByOpenIdLike(fromUserName)
             println "UU"+userinfo.subscribe
             userinfo.setSubscribe(false)
             println("un sub%%******:::"+fromUserName+" id:"+userinfo.id)
