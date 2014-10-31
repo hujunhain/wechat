@@ -26,7 +26,7 @@ class UserService {
        if(code)jsonStr=weChatService.wxService.execute(new SimpleGetRequestExecutor(), url, null);
        JSONElement jsonObject = JSON.parse(jsonStr)
 
-       def openid=jsonObject.get("openId")
+       def openid=jsonObject.get("openid")
 
        return openid
    }
