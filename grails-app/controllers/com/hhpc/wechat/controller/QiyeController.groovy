@@ -5,7 +5,7 @@ class QiyeController {
     def application
     def index() {
         println "cPConfig::"+cPConfig
-        println "application:"+application?.config.qiye.corpId
+        println "application:"+application?.config?.qiye?.corpId
         render "abc"+cPConfig
     }
 }
