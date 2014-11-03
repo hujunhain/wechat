@@ -1,6 +1,6 @@
 package com.hhpc.wechat.domain
 
-import chanjarster.weixin.bean.WxXmlMessage
+
 
 class MergerSms {
     Date date;//接收时间
