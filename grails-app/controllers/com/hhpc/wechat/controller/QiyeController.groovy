@@ -7,7 +7,7 @@ class QiyeController {
     def index() {
         println "cPConfig::"+cPConfig
         println "application:"+application?.config?.qiye?.corpId
-        println "grailsapplicationXXXX:"+wxCpService.wxCpConfigStorage.corpId
-        render "abc"+cPConfig
+        println "grailsapplicationXXXX:"+wxCpService?.wxCpConfigStorage
+        render "abc"+cPConfig+" <br>wxCpService:"+wxCpService
     }
 }
