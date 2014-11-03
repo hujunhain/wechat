@@ -68,8 +68,8 @@ grails.project.dependency.resolution = {
 
     plugins {
         // plugins for the build system only
-       // build ":tomcat:7.0.55"
-        build ":jetty:3.0.0"
+        build ":tomcat:7.0.55"
+       // build ":jetty:3.0.0"
 
 
 
