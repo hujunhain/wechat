@@ -1,5 +1,6 @@
 import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage
 
+
 // Place your Spring DSL code here
 beans = {
        def grailsApplication=new org.codehaus.groovy.grails.commons.DefaultGrailsApplication()
