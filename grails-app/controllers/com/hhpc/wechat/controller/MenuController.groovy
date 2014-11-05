@@ -6,7 +6,7 @@ class MenuController {
 
     def wxCpService
     def weChatService
-    def wxCpConfigStorage //WxCpConfigStorage
+
 
 
 
@@ -73,19 +73,19 @@ class MenuController {
         WxMenu.WxMenuButton button30 = new WxMenu.WxMenuButton();
         button30.setType("view");
         button30.setName("注册");
-        button30.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxCpConfigStorage.corpId}&redirect_uri=http://${weChatService.serverIp}/user/create&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
+        button30.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxCpService.wxCpConfigStorage.corpId}&redirect_uri=http://${weChatService.serverIp}/user/create&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
 
         //println button30.url
 
         WxMenu.WxMenuButton button31 = new WxMenu.WxMenuButton();
         button31.setType("view");
         button31.setName("管理");
-        button31.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxCpConfigStorage.corpId}&redirect_uri=http://${weChatService.serverIp}/user/manager&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
+        button31.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxCpService.wxCpConfigStorage.corpId}&redirect_uri=http://${weChatService.serverIp}/user/manager&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
 
         WxMenu.WxMenuButton button32 = new WxMenu.WxMenuButton();
         button32.setType("view");
         button32.setName("消息");
-        button32.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxCpConfigStorage.corpId}&redirect_uri=http://${weChatService.serverIp}/message/list&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
+        button32.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxCpService.wxCpConfigStorage.corpId}&redirect_uri=http://${weChatService.serverIp}/message/list&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
 
         WxMenu.WxMenuButton button33 = new WxMenu.WxMenuButton();
         button33.setType("click");

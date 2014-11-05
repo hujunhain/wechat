@@ -48,10 +48,10 @@ class QiyeController {
     // end todo
 
 
-        String msgSignature = params("msg_signature");
-        String nonce = params("nonce");
-        String timestamp = params("timestamp");
-        String echostr = params("echostr");
+        String msgSignature = params["msg_signature"];
+        String nonce = params["nonce"];
+        String timestamp = params["timestamp"];
+        String echostr = params["echostr"];
 
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
