@@ -1,12 +1,21 @@
 package com.hhpc.wechat.controller
 
+import com.hhpc.wechat.domain.Area
+import com.hhpc.wechat.domain.MergerSms
+import com.hhpc.wechat.domain.SendSms
+import com.hhpc.wechat.domain.SmsStatus
+import me.chanjar.weixin.common.api.WxConsts
 import me.chanjar.weixin.cp.api.WxCpMessageHandler
 import me.chanjar.weixin.cp.api.WxCpMessageRouter
 import me.chanjar.weixin.cp.bean.WxCpXmlMessage
 import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage
 import me.chanjar.weixin.cp.bean.WxCpXmlOutTextMessage
 import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil
+import me.chanjar.weixin.mp.api.WxMpMessageHandler
 import me.chanjar.weixin.mp.bean.WxMpXmlMessage
+import me.chanjar.weixin.mp.bean.WxMpXmlOutMessage
+import me.chanjar.weixin.mp.bean.WxMpXmlOutTextMessage
+import me.chanjar.weixin.mp.bean.result.WxMpUser
 import org.apache.commons.lang3.StringUtils
 
 import javax.servlet.http.HttpServletResponse
@@ -47,6 +56,17 @@ class QiyeController {
 
     // end todo
 
+        StringBuffer sb = new StringBuffer();
+
+        wxCpMessageRouter
+                .rule().async(false).rContent("\\d{1,2}").handler(new WxMsgMessageHandler()).end()
+                .rule().async(false).rContent("1\\d{10}.*").msgType(WxConsts.XML_MSG_TEXT).handler(new WxWangMessageHandler()).end()
+                .rule().async(false).event(WxConsts.EVT_SUBSCRIBE).handler(new WxSubMessageHandler()).end()
+                .rule().async(false).event(WxConsts.EVT_UNSUBSCRIBE).handler(new WxUnSubMessageHandler()).end()
+                .rule().async(false).handler(new WxEchoMessageHandler(sb, WxConsts.XML_MSG_TEXT)).end()
+        //   router.rule().async(false).msgType(WxConsts.XML_MSG_TEXT).handler(handler(sb, WxConsts.XML_MSG_TEXT)).end()
+
+
 
         String msgSignature = params["msg_signature"];
         String nonce = params["nonce"];
@@ -81,5 +101,244 @@ class QiyeController {
         }
 
         return;
+    }
+
+
+
+    public class WxWangMessageHandler  implements WxCpMessageHandler{
+
+        @Override
+        public WxCpXmlOutMessage handle(WxCpXmlMessage wxMessage, Map<String, Object> context) {
+
+            println "进入短信发送适配器。。。。。。。"
+
+            def openid= wxMessage.fromUserName
+            def sendNum=wxMessage.getContent()
+            def msg="你还不能发送手机短信！"
+            if("ok_buslMPDuu-h6amU0XGX49f_Qc"==openid||"ok_busih96pQuC0C1iUuh2KC_iA0"==openid) {
+                //获取 权限
+
+                def sms = "拨动祝福的琴弦，为您唱出最美妙的生日歌，点亮幸福的烛光，在您生日之际，（青岛啤酒）华海鹏城衷心的祝您生日快乐，身体健康！"
+
+                if(sendNum.length()>11){
+                    sms= sendNum.substring(11)
+                    sendNum= sendNum.substring(0,11)
+                }
+                def smsId = smsService.send(sendNum, sms)
+
+                SendSms sendSms=new SendSms()
+                sendSms.openid=openid
+                sendSms.msg=sms
+                sendSms.smsId=smsId
+
+                sendSms.save()
+
+                println "smsId    :"+smsId
+                // def status=smsService.status(smsId)
+                msg="短信已经发送"+"("+sendNum+")"
+            }
+
+
+            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
+            m.setContent(msg);
+            m.setCreateTime(1122l);
+            m.setFromUserName(wxMessage.toUserName);
+            m.setToUserName(wxMessage.fromUserName);
+            return m;
+        }
+    }
+    public class WxMsgMessageHandler implements WxCpMessageHandler{
+
+        @Override
+        public WxCpXmlOutMessage handle(WxCpXmlMessage wxMessage, Map<String, Object> context) {
+
+            println "报数短信查询适配器。。。。。。。"
+
+            def openid= wxMessage.fromUserName
+            def msgContent=wxMessage.getContent().toInteger()
+
+
+            //获取 权限
+
+            def msgList=  MergerSms.list( [max: msgContent, offset: 0, sort: "id", order: "desc"])
+            def msg=""
+            msgList.each {
+                msg+= it.message+"\n"
+            }
+
+            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
+            m.setContent(msg);
+            m.setCreateTime(1122l);
+            m.setFromUserName(wxMessage.toUserName);
+            m.setToUserName(wxMessage.fromUserName);
+            return m;
+        }
+    }
+    /*
+    subscribe(订阅)
+     */
+    public  class WxSubMessageHandler implements WxCpMessageHandler {
+        @Override
+        public WxCpXmlOutMessage handle(WxCpXmlMessage wxMessage, Map<String, Object> context) {
+
+            println "进入订阅微信适配器。。。。。。。"
+
+            def fromUserName= wxMessage.fromUserName
+            WxMpUser userinfo=WxMpUser.findByOpenIdLike(fromUserName)
+
+
+            def wxuserinfo=weChatService.userInfo(fromUserName,'zh')
+            if(!userinfo)userinfo=wxuserinfo
+            else{
+                userinfo.nickname=wxuserinfo.nickname
+                userinfo.subscribe=wxuserinfo.subscribe
+                userinfo.city=wxuserinfo.city
+                userinfo.province=wxuserinfo.province
+                userinfo.headImgUrl=wxuserinfo.headImgUrl
+                userinfo.sex=wxuserinfo.sex
+            }
+            println "ss"
+            println "ss"
+            println "s"
+            println "fromUserName:"+fromUserName+" userinfo.id"+userinfo.id
+
+
+
+            userinfo.createDate=new Date();
+
+            if (!userinfo.hasErrors() && userinfo.save()) {
+                println "save ok????"
+            }
+            else {
+                userinfo.errors.allErrors.each {
+                    println "save userinfo error:"+it
+                }
+            }
+
+            userService.save(userinfo)
+
+            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
+            m.setContent(userinfo.nickname+"欢迎关注华海鹏城");
+            m.setCreateTime(1122l);
+            m.setFromUserName(wxMessage.toUserName);
+            m.setToUserName(wxMessage.fromUserName);
+            return m;
+        }
+    }
+    /*
+  subscribe(取消订阅)
+   */
+    public  class WxUnSubMessageHandler implements WxCpMessageHandler {
+        @Override
+        public WxCpXmlOutMessage handle(WxCpXmlMessage wxMessage, Map<String, Object> context) {
+
+            def fromUserName= wxMessage.fromUserName
+
+            //   def userinfo=weChatService.userInfo(fromUserName,'zh')
+            println "进入取消订阅适配器。。。。。。。"
+
+
+            WxMpUser userinfo=WxMpUser.findByOpenIdLike(fromUserName)
+            println "UU"+userinfo.subscribe
+            userinfo.setSubscribe(false)
+            println("un sub%%******:::"+fromUserName+" id:"+userinfo.id)
+            userService.save(userinfo)
+            if (!userinfo.hasErrors() && userinfo.save()) {
+                println "save ok????"
+            }
+            else {
+                userinfo.errors.allErrors.each {
+                    println "save userinfo error:"+it
+                }
+            }
+
+            println "tt::::::::"+userinfo.subscribe
+            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
+            m.setContent("你发送的消息：subscribe"+userinfo.nickname);
+            m.setCreateTime(1122l);
+            m.setFromUserName(wxMessage.toUserName);
+            m.setToUserName(wxMessage.fromUserName);
+            return m;
+        }
+    }
+    public  class WxEchoMessageHandler implements WxCpMessageHandler {
+
+        private StringBuffer sb;
+        private String echoStr;
+
+        public WxEchoMessageHandler(StringBuffer sb, String echoStr) {
+            this.sb = sb;
+            this.echoStr = echoStr;
+        }
+
+        @Override
+        public WxCpXmlOutMessage handle(WxCpXmlMessage wxMessage, Map<String, Object> context) {
+
+            println "进入消息接收显示适配器。。。。。。。"
+
+            sb.append(this.echoStr).append(',').append("count:"+wxMessage.getContent()+" touser:"+wxMessage.getToUserName());
+
+            println "XXXXXXXXX"
+
+            wxMessage.save();
+
+            def msgContent=wxMessage.getContent()
+
+            def resultSms=msgContent
+
+
+            if(msgContent)msgContent=msgContent.replaceAll('，',',').replaceAll('＃','#').replaceAll('﹟','#').replaceAll('【','[').replaceAll('】',']').replace('［','[').replace('］',']').replace('「','[').replace('」',']').replaceAll('　', "").replaceAll("／","/").replaceAll(/\s/,"").replaceAll("\\(\\d/\\d\\)","").replaceAll('（','(').replaceAll('）',')').replaceAll(' ','').toUpperCase()
+
+            println "msgContent:"+msgContent
+            def     findRemark= msgContent =~/^([A-Z]{1,2})(\d{4}).*#$/  // 字母开头日期 ＃结尾
+            if(findRemark.matches())
+            {
+                println "find@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                MergerSms mergerSms=new MergerSms();
+                def mergerStatus=SmsStatus.findByName("合并成功");
+                def  finder2_=msgContent =~ /^([A-Z]{1,2}).*/  //匹配以一个字母后面四个数字开始，以名字( 一到五个字符) # 结尾
+                if(finder2_.find()) {
+                    //    println "/匹配日期数字之前的非数字字符:"+finder2_.group(1)
+                    mergerSms.area = Area.findBySmsCode(finder2_.group(1));
+
+                }
+                mergerSms.message=msgContent
+                mergerSms.date=new Date()
+                mergerSms.number=wxMessage.fromUserName
+                mergerSms.infos="接收成功"
+                mergerSms.status=mergerStatus
+                mergerSms.wxMessageId=wxMessage.id
+
+                if (!mergerSms.hasErrors() && mergerSms.save()) {
+                    //println "save ok!"
+                    try {
+                        resultSms= parseSmsService.parseSms(mergerSms)
+                    }catch (Exception e){
+                        resultSms=e.message
+                    }
+                }
+                else {
+                    mergerSms.errors.allErrors.each {
+                        println "save mergerSms error:"+it
+                    }
+                }
+
+
+            }
+            else{
+                println "not find smscont"
+            }
+
+
+            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
+
+            def msg=resultSms?"你发送的消息："+resultSms:""
+
+            m.setContent(msg);
+            m.setCreateTime(1122l);
+            m.setFromUserName(wxMessage.toUserName);
+            m.setToUserName(wxMessage.fromUserName);
+            return m;
+        }
     }
 }
