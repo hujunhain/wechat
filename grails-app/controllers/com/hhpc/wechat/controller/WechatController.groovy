@@ -358,7 +358,7 @@ class WechatController {
                 }
             }
 
-            userService.save(userinfo)
+            userService.saveMpUser(userinfo)
 
             WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
             m.setContent(userinfo.nickname+"欢迎关注华海鹏城");

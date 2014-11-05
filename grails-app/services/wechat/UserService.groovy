@@ -6,6 +6,7 @@ import com.hhpc.wechat.domain.Seller
 import grails.converters.JSON
 import grails.transaction.Transactional
 import me.chanjar.weixin.common.util.http.SimpleGetRequestExecutor
+import me.chanjar.weixin.cp.bean.WxCpUser
 import me.chanjar.weixin.mp.bean.result.WxMpUser
 import org.codehaus.groovy.grails.web.json.JSONElement
 
@@ -31,7 +32,18 @@ class UserService {
        return openid
    }
 
-    def save(WxMpUser user) {
+    def saveCpUser(WxCpUser user) {
+
+
+        WxCpUser.withTransaction { status ->
+            println "status:" + status
+            user.save();
+            println "bbbbb  status:" + status
+        }
+
+    }
+
+    def saveMpUser(WxMpUser user) {
 
 //        Account.withTransaction { status ->
 //                 def source = Account.get(params.from)
@@ -45,7 +57,7 @@ class UserService {
 //                         } else { status.setRollbackOnly() }
 //                     }
 //        }
-        WxUser.withTransaction { status ->
+        WxMpUser.withTransaction { status ->
             println "status:" + status
             user.save();
             println "bbbbb  status:" + status

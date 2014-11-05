@@ -6,6 +6,10 @@ import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
 import me.chanjar.weixin.cp.util.xml.XmlTransformer;
 import org.apache.commons.io.IOUtils;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -25,9 +29,23 @@ import java.util.List;
  *
  * @author Daniel Qian
  */
+
+@Entity
+@Table(name="Wx_Cp_Message")
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WxCpXmlMessage {
+
+    @Id
+    @GeneratedValue
+    Long id;
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
   ///////////////////////
   // 以下都是微信推送过来的消息的xml的element所对应的属性

@@ -2,6 +2,10 @@ package me.chanjar.weixin.cp.bean;
 
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +14,8 @@ import java.util.List;
  *
  * @author Daniel Qian
  */
+@Entity
+@Table(name="Wx_Cp_user")
 public class WxCpUser {
 
   private String userId;
@@ -23,7 +29,21 @@ public class WxCpUser {
   private String weiXinId;
   private final List<Attr> extAttrs = new ArrayList<Attr>();
 
-  public String getUserId() {
+    /**********/
+
+    @Id
+    @GeneratedValue
+    Long id;
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public String getUserId() {
     return userId;
   }
 

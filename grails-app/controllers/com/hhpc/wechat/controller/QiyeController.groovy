@@ -7,6 +7,7 @@ import com.hhpc.wechat.domain.SmsStatus
 import me.chanjar.weixin.common.api.WxConsts
 import me.chanjar.weixin.cp.api.WxCpMessageHandler
 import me.chanjar.weixin.cp.api.WxCpMessageRouter
+import me.chanjar.weixin.cp.bean.WxCpUser
 import me.chanjar.weixin.cp.bean.WxCpXmlMessage
 import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage
 import me.chanjar.weixin.cp.bean.WxCpXmlOutTextMessage
@@ -25,6 +26,11 @@ class QiyeController {
     def wxCpConfigStorage //WxCpConfigStorage
     def application
     def wxCpService
+
+    def userService
+    def SmsService
+
+    def parseSmsService
 
 
     def index() {
@@ -139,9 +145,8 @@ class QiyeController {
             }
 
 
-            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
+            WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
             m.setContent(msg);
-            m.setCreateTime(1122l);
             m.setFromUserName(wxMessage.toUserName);
             m.setToUserName(wxMessage.fromUserName);
             return m;
@@ -166,9 +171,8 @@ class QiyeController {
                 msg+= it.message+"\n"
             }
 
-            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
+            WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
             m.setContent(msg);
-            m.setCreateTime(1122l);
             m.setFromUserName(wxMessage.toUserName);
             m.setToUserName(wxMessage.fromUserName);
             return m;
@@ -184,18 +188,21 @@ class QiyeController {
             println "进入订阅微信适配器。。。。。。。"
 
             def fromUserName= wxMessage.fromUserName
-            WxMpUser userinfo=WxMpUser.findByOpenIdLike(fromUserName)
+            WxCpUser userinfo=WxCpUser.findByUserId(fromUserName)
 
 
-            def wxuserinfo=weChatService.userInfo(fromUserName,'zh')
+            def wxuserinfo=wxCpService.userGet(fromUserName,'zh')
             if(!userinfo)userinfo=wxuserinfo
             else{
-                userinfo.nickname=wxuserinfo.nickname
-                userinfo.subscribe=wxuserinfo.subscribe
-                userinfo.city=wxuserinfo.city
-                userinfo.province=wxuserinfo.province
-                userinfo.headImgUrl=wxuserinfo.headImgUrl
-                userinfo.sex=wxuserinfo.sex
+                userinfo.userId=wxuserinfo.userId
+                userinfo.name=wxuserinfo.name
+                userinfo.departIds=wxuserinfo.departIds
+                userinfo.email=wxuserinfo.email
+                userinfo.gender=wxuserinfo.gender
+                userinfo.mobile=wxuserinfo.mobile
+                userinfo.position=wxuserinfo.position
+                userinfo.tel=wxuserinfo.tel
+
             }
             println "ss"
             println "ss"
@@ -204,7 +211,7 @@ class QiyeController {
 
 
 
-            userinfo.createDate=new Date();
+           // userinfo.createDate=new Date();
 
             if (!userinfo.hasErrors() && userinfo.save()) {
                 println "save ok????"
@@ -215,12 +222,11 @@ class QiyeController {
                 }
             }
 
-            userService.save(userinfo)
+            userService.saveCpUser(userinfo)
 
-            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
-            m.setContent(userinfo.nickname+"欢迎关注华海鹏城");
-            m.setCreateTime(1122l);
-            m.setFromUserName(wxMessage.toUserName);
+            WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
+            m.setContent(userinfo.name+"欢迎关注华海鹏城");
+             m.setFromUserName(wxMessage.toUserName);
             m.setToUserName(wxMessage.fromUserName);
             return m;
         }
@@ -253,9 +259,8 @@ class QiyeController {
             }
 
             println "tt::::::::"+userinfo.subscribe
-            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
+            WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
             m.setContent("你发送的消息：subscribe"+userinfo.nickname);
-            m.setCreateTime(1122l);
             m.setFromUserName(wxMessage.toUserName);
             m.setToUserName(wxMessage.fromUserName);
             return m;
@@ -330,12 +335,10 @@ class QiyeController {
             }
 
 
-            WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
-
+            WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
             def msg=resultSms?"你发送的消息："+resultSms:""
 
             m.setContent(msg);
-            m.setCreateTime(1122l);
             m.setFromUserName(wxMessage.toUserName);
             m.setToUserName(wxMessage.fromUserName);
             return m;
