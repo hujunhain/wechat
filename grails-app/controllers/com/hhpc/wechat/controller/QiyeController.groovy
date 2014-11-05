@@ -38,7 +38,7 @@ class QiyeController {
             @Override public WxCpXmlOutMessage handle(WxCpXmlMessage wxMessage, Map<String, Object> context) {
                 WxCpXmlOutTextMessage m = WxCpXmlOutMessage
                         .TEXT()
-                        .content("测试加密消息")
+                        .content("测试加密消息:"+wxMessage.content)
                         .fromUser(wxMessage.getToUserName())
                         .toUser(wxMessage.getFromUserName())
                         .build();
