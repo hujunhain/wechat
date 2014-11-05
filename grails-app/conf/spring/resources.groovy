@@ -6,7 +6,7 @@ import me.chanjar.weixin.cp.api.WxCpServiceImpl
 beans = {
      //  def grailsApplication=new org.codehaus.groovy.grails.commons.DefaultGrailsApplication()
 
-    cPConfig(WxCpInMemoryConfigStorage) {
+    wxCpConfigStorage(WxCpInMemoryConfigStorage) {
         corpId=application.config.qiye.corpId;      // 设置微信企业号的appid
         corpSecret=application.config.qiye.corpSecret;  // 设置微信企业号的app corpSecret
         agentId=application.config.qiye.agentId;     // 设置微信企业号应用ID
@@ -15,7 +15,7 @@ beans = {
     }
 
      wxCpService(WxCpServiceImpl){
-         wxCpConfigStorage=ref("cPConfig")
+         wxCpConfigStorage=ref("wxCpConfigStorage")
 
      }
 
