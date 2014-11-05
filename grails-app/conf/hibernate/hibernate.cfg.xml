@@ -2,9 +2,12 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <mapping package="me.chanjar.weixin.mp.bean" />
+        <mapping package="me.chanjar.weixin" />
         <mapping class="me.chanjar.weixin.mp.bean.WxMpXmlMessage" />
-
         <mapping class="me.chanjar.weixin.mp.bean.result.WxMpUser" />
+
+        <mapping class="me.chanjar.weixin.cp.bean.WxCpXmlMessage" />
+        <mapping class="me.chanjar.weixin.cp.bean.WxCpUser" />
+
     </session-factory>
 </hibernate-configuration>
