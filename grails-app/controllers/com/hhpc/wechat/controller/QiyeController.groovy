@@ -146,9 +146,11 @@ class QiyeController {
 
 
             WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
-            m.setContent(msg);
-            m.setFromUserName(wxMessage.toUserName);
-            m.setToUserName(wxMessage.fromUserName);
+             .content(msg)
+            .fromUser(wxMessage.toUserName)
+            .toUser(wxMessage.fromUserName)
+            .build();
+
             return m;
         }
     }
@@ -171,10 +173,14 @@ class QiyeController {
                 msg+= it.message+"\n"
             }
 
-            WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
-            m.setContent(msg);
-            m.setFromUserName(wxMessage.toUserName);
-            m.setToUserName(wxMessage.fromUserName);
+            WxCpXmlOutTextMessage m = WxCpXmlOutMessage
+                    .TEXT()
+               .content(msg)
+             .fromUser(wxMessage.toUserName)
+             .toUser(wxMessage.fromUserName)
+            .build();
+
+
             return m;
         }
     }
@@ -225,9 +231,10 @@ class QiyeController {
             userService.saveCpUser(userinfo)
 
             WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
-            m.setContent(userinfo.name+"欢迎关注华海鹏城");
-             m.setFromUserName(wxMessage.toUserName);
-            m.setToUserName(wxMessage.fromUserName);
+            .content(userinfo.name+"欢迎关注华海鹏城")
+             .fromUser(wxMessage.toUserName)
+            .toUser(wxMessage.fromUserName)
+            .build()
             return m;
         }
     }
@@ -260,9 +267,10 @@ class QiyeController {
 
            // println "tt::::::::"+userinfo.subscribe
             WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
-            m.setContent("你发送的消息：subscribe"+userinfo.name);
-            m.setFromUserName(wxMessage.toUserName);
-            m.setToUserName(wxMessage.fromUserName);
+            .content("你发送的消息：subscribe"+userinfo.name)
+            .fromUser(wxMessage.toUserName)
+            .toUser(wxMessage.fromUserName)
+            .build()
             return m;
         }
     }
@@ -334,13 +342,13 @@ class QiyeController {
                 println "not find smscont"
             }
 
-
-            WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
             def msg=resultSms?"你发送的消息："+resultSms:""
-
-            m.setContent(msg);
-            m.setFromUserName(wxMessage.toUserName);
-            m.setToUserName(wxMessage.fromUserName);
+            WxCpXmlOutTextMessage m = WxCpXmlOutMessage
+                    .TEXT()
+            .content(msg)
+            .fromUser(wxMessage.toUserName)
+            .toUser(wxMessage.fromUserName)
+            .build()
             return m;
         }
     }
