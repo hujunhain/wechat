@@ -6,10 +6,7 @@ import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
 import me.chanjar.weixin.cp.util.xml.XmlTransformer;
 import org.apache.commons.io.IOUtils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -173,12 +170,15 @@ public class WxCpXmlMessage {
   private Integer errorCount;
 
   @XmlElement(name = "ScanCodeInfo")
+  @Transient
   private ScanCodeInfo scanCodeInfo = new ScanCodeInfo();
 
   @XmlElement(name = "SendPicsInfo")
+  @Transient
   private SendPicsInfo sendPicsInfo = new SendPicsInfo();
 
   @XmlElement(name = "SendLocationInfo")
+  @Transient
   private SendLocationInfo sendLocationInfo = new SendLocationInfo();
 
   public Integer getAgentId() {

@@ -244,11 +244,11 @@ class QiyeController {
             println "进入取消订阅适配器。。。。。。。"
 
 
-            WxMpUser userinfo=WxMpUser.findByOpenIdLike(fromUserName)
-            println "UU"+userinfo.subscribe
-            userinfo.setSubscribe(false)
+            WxCpUser userinfo=WxCpUser.findByUserId(fromUserName)
+         //   println "UU"+userinfo.subscribe
+          //  userinfo.setSubscribe(false)
             println("un sub%%******:::"+fromUserName+" id:"+userinfo.id)
-            userService.save(userinfo)
+            userService.saveCpUser(userinfo)
             if (!userinfo.hasErrors() && userinfo.save()) {
                 println "save ok????"
             }
@@ -258,9 +258,9 @@ class QiyeController {
                 }
             }
 
-            println "tt::::::::"+userinfo.subscribe
+           // println "tt::::::::"+userinfo.subscribe
             WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
-            m.setContent("你发送的消息：subscribe"+userinfo.nickname);
+            m.setContent("你发送的消息：subscribe"+userinfo.name);
             m.setFromUserName(wxMessage.toUserName);
             m.setToUserName(wxMessage.fromUserName);
             return m;

@@ -2,10 +2,7 @@ package me.chanjar.weixin.cp.bean;
 
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +24,8 @@ public class WxCpUser {
   private String tel;
   private String email;
   private String weiXinId;
+
+    @Transient
   private final List<Attr> extAttrs = new ArrayList<Attr>();
 
     /**********/
