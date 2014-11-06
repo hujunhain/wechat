@@ -14,12 +14,15 @@ import org.codehaus.groovy.grails.web.json.JSONElement
 class UserService {
 
     def weChatService
+    def wxCpService
 
     def serviceMethod() {
 
     }
-
-   def getOpenidByCode(def code){
+/*
+服务号用
+ */
+   def getMpOpenidByCode(def code){
 
        def url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=${weChatService.wxConfig.appId}&secret=${weChatService.wxConfig.secret}&code=${code}&grant_type=authorization_code"
        println ""+url
@@ -31,6 +34,22 @@ class UserService {
 
        return openid
    }
+
+    /*
+    企业号用
+     */
+    def getCpUseridByCode(def code){
+        def url= "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=${wxCpService.wxCpConfigStorage.accessToken}&code=${code}&agentid=${wxCpService.wxCpConfigStorage.agentId}"
+       // def url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wxCpService..wxConfig.appId}&secret=${weChatService.wxConfig.secret}&code=${code}&grant_type=authorization_code"
+        println ""+url
+        def jsonStr ="{openid:def}"
+        if(code)jsonStr=weChatService.wxService.execute(new SimpleGetRequestExecutor(), url, null);
+        JSONElement jsonObject = JSON.parse(jsonStr)
+
+        def userId=jsonObject.get("UserId")
+
+        return userId
+    }
 
     def saveCpUser(WxCpUser user) {
 
