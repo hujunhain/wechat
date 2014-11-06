@@ -74,7 +74,7 @@ class MenuController {
         button30.setType("view");
         button30.setName("注册A");
        // def regUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=CORPID&                                 redirect_uri=REDIRECT_URI                                   &response_type=code&scope=SCOPE&state=STATE#wechat_redirect"
-        def    regUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxCpService.wxCpConfigStorage.corpId}&redirect_uri=http://${weChatService.serverIp}/cpUser/create&response_type=code&scope=SCOPE&state=STATE#wechat_redirect"
+        def    regUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxCpService.wxCpConfigStorage.corpId}&redirect_uri=http://${weChatService.serverIp}/cpUser/create&response_type=code&scope=snsapi_base&state=1#wechat_redirect"
         button30.setUrl(regUrl);
 
 

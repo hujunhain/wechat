@@ -21,8 +21,8 @@ class CpUserController {
         def offset=params.int("offset",0)
         def code=params['code']
         response.setCharacterEncoding("UTF-8");
-        def openid= userService.getOpenidByCode(code)
-        def userinfo= WxMpUser.findByOpenId(openid)
+        def openid= userService.getCpUseridByCode(code)
+        def userinfo= WxCpUser.findByUserId(openid)
         //findAllByWxUserIdIsNotNull
         def sellerList=Seller.list( [max: 10, offset: offset, sort: "id", order: "desc"])
         println "sellerList:"+sellerList.size()
