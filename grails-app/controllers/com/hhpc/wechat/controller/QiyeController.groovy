@@ -197,7 +197,7 @@ class QiyeController {
             WxCpUser userinfo=WxCpUser.findByUserId(fromUserName)
 
 
-            def wxuserinfo=wxCpService.userGet(fromUserName,'zh')
+            def wxuserinfo=wxCpService.userGet(fromUserName)
             if(!userinfo)userinfo=wxuserinfo
             else{
                 userinfo.userId=wxuserinfo.userId
