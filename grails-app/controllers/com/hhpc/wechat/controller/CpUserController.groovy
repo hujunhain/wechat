@@ -151,7 +151,7 @@ class CpUserController {
         println "A"
 
         def userId= userService.getCpUseridByCode(code)
-        prinltn "BBB userId:"+userId
+        println "BBB userId:"+userId
         wxCpService.userAuthenticated(userId)
         // else openid='ok_busih96pQuC0C1iUuh2KC_iA0'
         def userinfo= WxCpUser.findByUserId(userId)
