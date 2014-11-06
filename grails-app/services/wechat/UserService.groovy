@@ -8,6 +8,7 @@ import grails.transaction.Transactional
 import me.chanjar.weixin.common.util.http.SimpleGetRequestExecutor
 import me.chanjar.weixin.cp.bean.WxCpUser
 import me.chanjar.weixin.mp.bean.result.WxMpUser
+import org.apache.commons.lang3.StringUtils
 import org.codehaus.groovy.grails.web.json.JSONElement
 
 @Transactional
@@ -39,6 +40,11 @@ class UserService {
     企业号用
      */
     def getCpUseridByCode(def code){
+
+        if (StringUtils.isBlank(wxCpService.wxCpConfigStorage.getAccessToken())) {
+            wxCpService.accessTokenRefresh();
+        }
+
         def url= "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=${wxCpService.wxCpConfigStorage.getAccessToken()}&code=${code}&agentid=${wxCpService.wxCpConfigStorage.agentId}"
        // def url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wxCpService..wxConfig.appId}&secret=${weChatService.wxConfig.secret}&code=${code}&grant_type=authorization_code"
         println ""+url

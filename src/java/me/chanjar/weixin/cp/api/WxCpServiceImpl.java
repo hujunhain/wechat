@@ -71,6 +71,7 @@ public class WxCpServiceImpl implements WxCpService {
   }
 
   public void accessTokenRefresh() throws WxErrorException {
+      System.out.println("**********accessTokenRefresh*************");
     if (!GLOBAL_ACCESS_TOKEN_REFRESH_FLAG.getAndSet(true)) {
       try {
         String url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?"
