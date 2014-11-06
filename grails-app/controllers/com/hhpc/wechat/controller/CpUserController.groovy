@@ -151,13 +151,15 @@ class CpUserController {
         println "A"
 
         def userId= userService.getCpUseridByCode(code)
-        println "BBB userId:"+userId
+
        // wxCpService.userAuthenticated(userId)
         // else openid='ok_busih96pQuC0C1iUuh2KC_iA0'
         def userinfo= WxCpUser.findByUserId(userId)
 
         def seller=Seller.findByWxUserId(userinfo.id)
-        if(seller.status.name=="是"){
+
+        println "BBB userId:"+userId+" id:"+userinfo.id
+        if(seller?.status.name=="是"){
 
             render "你的微信号和手机号已经绑定且有效，不用再绑定注册了！！！"
         }
