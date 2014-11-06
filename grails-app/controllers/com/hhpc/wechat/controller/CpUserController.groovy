@@ -159,7 +159,7 @@ class CpUserController {
         def seller=Seller.findByWxUserId(userinfo.id)
 
         println "BBB userId:"+userId+" id:"+userinfo.id
-        if(seller?.status.name=="是"){
+        if(seller?.status?.name=="是"){
 
             render "你的微信号和手机号已经绑定且有效，不用再绑定注册了！！！"
         }
