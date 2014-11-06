@@ -39,7 +39,7 @@ class UserService {
     企业号用
      */
     def getCpUseridByCode(def code){
-        def url= "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=${wxCpService.wxCpConfigStorage.accessToken}&code=${code}&agentid=${wxCpService.wxCpConfigStorage.agentId}"
+        def url= "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=${wxCpService.wxCpConfigStorage.getAccessToken()}&code=${code}&agentid=${wxCpService.wxCpConfigStorage.agentId}"
        // def url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wxCpService..wxConfig.appId}&secret=${weChatService.wxConfig.secret}&code=${code}&grant_type=authorization_code"
         println ""+url
         def jsonStr ="{openid:def}"
