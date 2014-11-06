@@ -47,7 +47,7 @@ class UserService {
         println "cp user jsonStr:"+jsonStr
         JSONElement jsonObject = JSON.parse(jsonStr)
 
-        def userId=jsonObject.get("userId")
+        def userId=jsonObject.get("UserId")
 
         return userId
     }
