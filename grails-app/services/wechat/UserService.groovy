@@ -43,10 +43,11 @@ class UserService {
        // def url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wxCpService..wxConfig.appId}&secret=${weChatService.wxConfig.secret}&code=${code}&grant_type=authorization_code"
         println ""+url
         def jsonStr ="{openid:def}"
-        if(code)jsonStr=weChatService.wxService.execute(new SimpleGetRequestExecutor(), url, null);
+        if(code)jsonStr=wxCpService.execute(new SimpleGetRequestExecutor(), url, null);
+        println "cp user jsonStr:"+jsonStr
         JSONElement jsonObject = JSON.parse(jsonStr)
 
-        def userId=jsonObject.get("UserId")
+        def userId=jsonObject.get("userId")
 
         return userId
     }

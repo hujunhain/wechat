@@ -72,8 +72,8 @@ class MenuController {
 
         WxMenu.WxMenuButton button30 = new WxMenu.WxMenuButton();
         button30.setType("view");
-        button30.setName("注册");
-       // def regUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=CORPID&                                 redirect_uri=REDIRECT_URI                                &response_type=code&scope=SCOPE&state=STATE#wechat_redirect"
+        button30.setName("注册A");
+       // def regUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=CORPID&                                 redirect_uri=REDIRECT_URI                                   &response_type=code&scope=SCOPE&state=STATE#wechat_redirect"
         def    regUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxCpService.wxCpConfigStorage.corpId}&redirect_uri=http://${weChatService.serverIp}/cpUser/create&response_type=code&scope=SCOPE&state=STATE#wechat_redirect"
         button30.setUrl(regUrl);
 
@@ -83,7 +83,7 @@ class MenuController {
         WxMenu.WxMenuButton button31 = new WxMenu.WxMenuButton();
         button31.setType("view");
         button31.setName("管理");
-        button31.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxCpService.wxCpConfigStorage.corpId}&redirect_uri=http://${weChatService.serverIp}/user/manager&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
+        button31.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxCpService.wxCpConfigStorage.corpId}&redirect_uri=http://${weChatService.serverIp}/cpUser/manager&response_type=code&scope=snsapi_base&state=1#wechat_redirect");
 
         WxMenu.WxMenuButton button32 = new WxMenu.WxMenuButton();
         button32.setType("view");
