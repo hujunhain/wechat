@@ -69,6 +69,9 @@ class CuXiaoController {
 
     // end todo
 
+
+        println "end todo..............."
+
         StringBuffer sb = new StringBuffer();
 
         wxCpMessageRouter
@@ -79,7 +82,7 @@ class CuXiaoController {
                 .rule().async(false).handler(new WxEchoMessageHandler(sb, WxConsts.XML_MSG_TEXT)).end()
         //   router.rule().async(false).msgType(WxConsts.XML_MSG_TEXT).handler(handler(sb, WxConsts.XML_MSG_TEXT)).end()
 
-
+println "end root set"
 
         String msgSignature = params["msg_signature"];
         String nonce = params["nonce"];
@@ -91,13 +94,16 @@ class CuXiaoController {
         if (StringUtils.isNotBlank(echostr)) {
             if (!wxCpService.checkSignature(msgSignature, timestamp, nonce, echostr)) {
                 // 消息签名不正确，说明不是公众平台发过来的消息
-                response.getWriter().println("非法请求");
+               // response.getWriter().println("非法请求");
+                render  "非法请求"
                 return;
             }
             WxCpCryptUtil cryptUtil = new WxCpCryptUtil(wxCpConfigStorage);
             String plainText = cryptUtil.decrypt(echostr);
             // 说明是一个仅仅用来验证的请求，回显echostr
-            response.getWriter().println(plainText);
+            println "回显echostr:"+plainText
+           // response.getWriter().println(plainText);
+            render plainText
             return;
         }
 
