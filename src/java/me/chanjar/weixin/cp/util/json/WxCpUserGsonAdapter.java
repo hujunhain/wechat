@@ -49,6 +49,8 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     user.setTel(GsonHelper.getString(o, "tel"));
     user.setEmail(GsonHelper.getString(o, "email"));
     user.setWeiXinId(GsonHelper.getString(o, "weixinid"));
+      user.setStatus(GsonHelper.getString(o, "status"));
+      user.setAvatar(GsonHelper.getString(o, "avatar"));
 
     if (GsonHelper.isNotNull(o.get("extattr"))) {
       JsonArray attrJsonElements = o.get("extattr").getAsJsonObject().get("attrs").getAsJsonArray();
@@ -97,6 +99,12 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     if (user.getWeiXinId() != null) {
       o.addProperty("weixinid", user.getWeiXinId());
     }
+      if (user.getStatus() != null) {
+          o.addProperty("status", user.getStatus());
+      }
+      if (user.getAvatar() != null) {
+          o.addProperty("avatar", user.getAvatar());
+      }
     if (user.getExtAttrs().size() > 0) {
       JsonArray attrsJsonArray = new JsonArray();
       for (WxCpUser.Attr attr : user.getExtAttrs()) {
