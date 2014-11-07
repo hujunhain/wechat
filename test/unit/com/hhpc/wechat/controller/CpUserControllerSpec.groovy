@@ -1,5 +1,6 @@
 package com.hhpc.wechat.controller
 
+import com.hhpc.wechat.controller.cp.CpUserController
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

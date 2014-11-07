@@ -68,6 +68,7 @@ public class WxCpXmlMessage {
 
   @XmlElement(name = "Content")
   @XmlJavaTypeAdapter(AdapterCDATA.class)
+  @Column(length=640)
   private String content;
 
   @XmlElement(name = "MsgId")
