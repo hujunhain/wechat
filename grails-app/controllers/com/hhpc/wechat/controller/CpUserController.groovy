@@ -50,7 +50,7 @@ class CpUserController {
         def restRrl=""
       def deptList=  wxCpService.departGet()
         deptList.each{dept->
-            def userList=wxCpService.departGetUsers(dept.id,1)
+            def userList=wxCpService.departGetUsers(dept.id,true)
             println  "XXXX dept id::"+dept.id
             restRrl+="<br>"+ "dept id::"+dept.id+" name:"+dept.name
             userList.each{userInfo->
