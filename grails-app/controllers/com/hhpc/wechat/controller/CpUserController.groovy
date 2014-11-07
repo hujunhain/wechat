@@ -13,6 +13,8 @@ class CpUserController {
     def SmsService
     def wxCpService
 
+
+
     def subscribe={
 
 
@@ -45,7 +47,19 @@ class CpUserController {
     }
 
     def index() {
+        def restRrl=""
+      def deptList=  wxCpService.departGet()
+        deptList.each{dept->
+            def userList=wxCpService.departGetUsers(dept.id,1)
+            println  "XXXX dept id::"+dept.id
+            restRrl+="<br>"+ "dept id::"+dept.id+" name:"+dept.name
+            userList.each{userInfo->
+                println "userInfo userId::"+userInfo.userId+" userInfo weiXinId"+userInfo.weiXinId+"userInfo.name:"+userInfo.name
+                restRrl+="<br>"+"userInfo userId::"+userInfo.userId+" userInfo weiXinId"+userInfo.weiXinId+"userInfo.name:"+userInfo.name
+            }
+        }
 
+        render( restRrl)
 
     }
     def manager={
