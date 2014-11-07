@@ -35,8 +35,14 @@ class CuXiaoController {
 
     def index() {
         println "cPConfig::"+wxCpConfigStorage
-        println "application:"+application?.config?.qiye?.corpId
-        println "grailsapplicationXXXX:"+wxCpService?.wxCpConfigStorage
+        ß
+
+        println "corpId:"+wxCpService?.wxCpConfigStorage?.corpId
+        println "aesKey:"+wxCpService?.wxCpConfigStorage?.aesKey
+        println "token:"+wxCpService?.wxCpConfigStorage?.token
+        println "agentId:"+wxCpService?.wxCpConfigStorage?.agentId
+        println "accessToken:"+wxCpService?.wxCpConfigStorage?.accessToken
+
        // render "abc"+wxCpConfigStorage+" <br>wxCpService:"+wxCpService
 
        //todo 一次
