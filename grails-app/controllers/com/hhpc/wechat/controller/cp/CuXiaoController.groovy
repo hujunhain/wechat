@@ -36,9 +36,7 @@ class CuXiaoController {
     def index() {
         println "cPConfig::"+wxCpConfigStorage
 
-        if (StringUtils.isBlank(wxCpService.wxCpConfigStorage.getAccessToken())) {
-            wxCpService.accessTokenRefresh();
-        }
+
 
         println "corpId:"+wxCpService?.wxCpConfigStorage?.corpId
         println "aesKey:"+wxCpService?.wxCpConfigStorage?.aesKey
