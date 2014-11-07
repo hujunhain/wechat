@@ -13,6 +13,37 @@ class CpUserController {
     def SmsService
     def wxCpService
 
+    def subscribe={
+
+
+        def code=params['code']
+        response.setCharacterEncoding("UTF-8");
+
+        println "BB"
+        println "BB"
+        println "BB"
+        println "BB"
+
+        def userId= userService.getCpUseridByCode(code)
+
+        // wxCpService.userAuthenticated(userId)
+        def userinfo= WxCpUser.findByUserId(userId)
+
+        if(!userinfo)
+            userinfo=wxCpService.userGet(userId)
+
+        def seller=Seller.findByWxUserId(userinfo.id)
+
+        println "BBB userId:"+userId+" id:"+userinfo.id
+        if(seller?.status?.name=="是"){
+
+            render "你的微信号和手机号已经绑定且有效，不用再绑定注册了！！！"
+        }
+
+        [userinfo:userinfo];
+
+    }
+
     def index() {
 
 
