@@ -35,7 +35,7 @@ class CuXiaoController {
 
     def index() {
         println "cPConfig::"+wxCpConfigStorage
-        ß
+         
 
         println "corpId:"+wxCpService?.wxCpConfigStorage?.corpId
         println "aesKey:"+wxCpService?.wxCpConfigStorage?.aesKey
