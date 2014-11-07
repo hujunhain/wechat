@@ -25,6 +25,10 @@ public class WxCpUser {
   private String email;
   private String weiXinId;
 
+    //*********//
+    String status; //关注状态: 1=已关注，2=已冻结，4=未关注
+    String avatar; //头像url。注：如果要获取小图将url最后的"/0"改成"/64"即可
+
     @Transient
   private final List<Attr> extAttrs = new ArrayList<Attr>();
 
@@ -126,7 +130,23 @@ public class WxCpUser {
     return WxCpGsonBuilder.INSTANCE.create().toJson(this);
   }
 
-  public static WxCpUser fromJson(String json) {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public static WxCpUser fromJson(String json) {
     return WxCpGsonBuilder.INSTANCE.create().fromJson(json, WxCpUser.class);
   }
 
@@ -157,5 +177,7 @@ public class WxCpUser {
     }
 
   }
+
+
 
 }

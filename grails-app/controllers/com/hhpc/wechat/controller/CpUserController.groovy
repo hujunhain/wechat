@@ -53,7 +53,8 @@ class CpUserController {
             def userList=wxCpService.departGetUsers(dept.id,true,null)
             println  "XXXX dept id::"+dept.id
             restRrl+="<br>"+ "dept id::"+dept.id+" name:"+dept.name
-            userList.each{userInfo->
+            userList.each{deptUser->
+                def userInfo=wxCpService.userGet(deptUser.userId)
                 println "userInfo userId::"+userInfo.userId+" userInfo weiXinId"+userInfo.weiXinId+"userInfo.name:"+userInfo.name
                 restRrl+="<br>"+"userInfo userId::"+userInfo.userId+" userInfo weiXinId"+userInfo.weiXinId+"userInfo.name:"+userInfo.name
             }

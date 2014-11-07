@@ -209,6 +209,7 @@ public class WxCpServiceImpl implements WxCpService {
   public WxCpUser userGet(String userid) throws WxErrorException {
     String url = "https://qyapi.weixin.qq.com/cgi-bin/user/get?userid=" + userid;
     String responseContent = execute(new SimpleGetRequestExecutor(), url, null);
+    System.out.println( "userGet json:"+responseContent);
     return WxCpUser.fromJson(responseContent);
   }
 
