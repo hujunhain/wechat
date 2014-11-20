@@ -28,6 +28,7 @@ class CpUserController {
 
         def userId= userService.getCpUseridByCode(code)
 
+
         // wxCpService.userAuthenticated(userId)
         def userinfo= WxCpUser.findByUserId(userId)
 
@@ -44,7 +45,7 @@ class CpUserController {
 
         }
 
-        wxCpService.userAuthenticated(userinfo.userId)
+      //  wxCpService.userAuthenticated(userinfo.userId)
 
         [userinfo:userinfo];
 
