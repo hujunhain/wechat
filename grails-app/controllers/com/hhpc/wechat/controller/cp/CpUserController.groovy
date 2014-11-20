@@ -34,7 +34,7 @@ class CpUserController {
         if(!userinfo)
             userinfo=wxCpService.userGet(userId)
 
-        def seller=Seller.findByWxUserId(userinfo.userId)
+        def seller=Seller.findByWxUserId(userinfo.id)
 
         println "BBB userId:"+userId+" id:"+userinfo.id
         if(seller?.status?.name=="是"){

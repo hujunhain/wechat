@@ -473,6 +473,7 @@ class WechatController {
             }
 
 
+
             WxMpXmlOutTextMessage m = new WxMpXmlOutTextMessage();
 
             def msg=resultSms?"你发送的消息："+resultSms:""
